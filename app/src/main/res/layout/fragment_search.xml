@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment">
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:id="@+id/search_parameters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/L1"
+            android:weightSum="3"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/first_name"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:background="@drawable/oval"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/middle_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/middle_name"
+                android:inputType="textPersonName"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:background="@drawable/oval"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:id="@+id/L2"
+            android:layout_below="@+id/L1"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/caste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/caste"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/city_label"
+                android:inputType="text"
+                android:padding="10dp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/taluka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/taluka"
+                android:inputType="text"
+                android:padding="10dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/L3"
+            android:layout_below="@+id/L2"
+            android:weightSum="3"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/district"
+                android:inputType="text"
+                android:padding="10dp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/death_anniversary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/oval"
+                android:hint="@string/date_of_death"
+                android:inputType="text"
+                android:digits="0123456789-"
+                android:padding="10dp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/mobile_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:hint="@string/mobile_no_label"
+                android:background="@drawable/oval"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/L3"
+            android:id="@+id/L4"
+            android:gravity="center_horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="30dp">
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/search"
+                app:backgroundTint="#03A9F4" />
+
+            <Button
+            android:id="@+id/btnCancelSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/cancelSearch"
+            app:backgroundTint="@color/red" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/emptyText"
+        android:text="@string/empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/search_parameters"
+        android:visibility="invisible"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_result"
+        android:layout_below="@+id/emptyText"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+</RelativeLayout>

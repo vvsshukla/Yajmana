@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFeedbackFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedback_layout"
+        android:layout_margin="20dp"
+        android:layout_marginTop="100dp">
+
+        <EditText
+            android:id="@+id/vanshawal_no"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:digits="0123456789"
+            android:hint="@string/vanshawal_no_label"
+            android:textSize="24sp"
+            android:maxLength="6"
+            android:importantForAutofill="no"
+            android:padding="10dp"
+            android:background="@drawable/oval" />
+
+        <EditText
+            android:id="@+id/content_text"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@+id/vanshawal_no"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            android:hint="@string/feedback_content_hint"
+            android:importantForAutofill="no"
+            android:background="@drawable/oval"
+            android:padding="10dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_text"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/feedback_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textSize="34sp"
+                app:backgroundTint="@color/primary"
+                />
+
+            <Button
+                android:id="@+id/feedback_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginLeft="20sp"
+                android:text="@string/cancel"
+                android:textSize="34sp"
+                app:backgroundTint="#F44336" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
