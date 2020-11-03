@@ -169,8 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/LayoutFive"
             android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:orientation="vertical">
 
             <!-- tumche purna nav -->
             <LinearLayout
@@ -180,19 +179,20 @@
                 android:weightSum="1">
 
             <TextView
-                android:layout_width="280dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"
                 android:text="@string/full_name_label"
                 android:textSize="18sp"
                 android:gravity="center_horizontal"
                 android:background="@drawable/oval"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
-                />
+                android:layout_marginTop="10dp" />
 
             <EditText
                 android:id="@+id/your_full_name"
-                android:layout_width="560dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
                 android:layout_height="wrap_content"
                 android:hint="@string/your_full_name_label"
                 android:background="@drawable/oval"
@@ -210,11 +210,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
                     android:text="@string/fathers_name"
                     android:textSize="18sp"
                     android:gravity="center_horizontal"
@@ -224,8 +226,9 @@
 
                 <EditText
                     android:id="@+id/fathers_full_name"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
                     android:hint="@string/fathers_full_name"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
@@ -240,10 +243,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/mothers_full_name"
                     android:textSize="18sp"
@@ -254,7 +259,8 @@
 
                 <EditText
                     android:id="@+id/mothers_full_name"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:hint="@string/mothers_full_name"
                     android:importantForAutofill="no"
@@ -269,10 +275,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/grandpa_name"
                     android:textSize="18sp"
@@ -283,7 +291,8 @@
 
                 <EditText
                     android:id="@+id/grandpa_name"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:hint="@string/grandpa_name"
@@ -298,10 +307,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/panjoba_name"
                     android:textSize="18sp"
@@ -313,7 +324,8 @@
                 <EditText
                     android:id="@+id/panjoba_name"
                     android:gravity="center_horizontal"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:hint="@string/panjoba_name"
                     android:importantForAutofill="no"
@@ -327,10 +339,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/ni_panjoba_name"
                     android:textSize="18sp"
@@ -341,7 +355,8 @@
 
                 <EditText
                     android:id="@+id/ni_panjoba_name"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:hint="@string/ni_panjoba_name"
@@ -505,10 +520,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/mobile_no_label"
                     android:textSize="18sp"
@@ -519,7 +536,8 @@
 
                 <EditText
                     android:id="@+id/mobile_no"
-                    android:layout_width="560dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:hint="@string/mobile_no"
                     android:importantForAutofill="no"
@@ -533,10 +551,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
-                    android:layout_width="280dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="@string/tip"
                     android:textSize="18sp"
@@ -547,7 +567,8 @@
 
                 <EditText
                     android:id="@+id/tip"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"

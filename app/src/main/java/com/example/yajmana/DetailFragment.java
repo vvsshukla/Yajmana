@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class DetailFragment extends Fragment {
     TextView mobileNo, tipText;
     LinearLayout L1, L2, L3, L4, L5, L6, L7;
     TextView t1[], t2[], t3[], t4[], t5[], t6[], t7[];
+    ProgressBar progressBar;
     String[] real_uncle_array, cousin_uncle_array, real_uncle_son_array, cousin_uncle_son_array, real_brother_array, real_brother_son_array, real_son_array, signatureSplit;
     private static final String base_url = "http://eastro.in";
 
@@ -54,8 +56,11 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        progressBar = view.findViewById(R.id.progressBar4);
+        progressBar.setVisibility(View.VISIBLE);
         getUIReferences(view);
         loadDetails();
+        progressBar.setVisibility(View.GONE);
         return view;
     }
 
@@ -95,7 +100,7 @@ public class DetailFragment extends Fragment {
                 Log.e("onResponse", "Inside onResponse:" + new Gson().toJson(response.body()));
                 List<Vanshawal> vanshawal = response.body();
                 if(vanshawal.get(0).getMobile().equals("")){
-                    Toast.makeText(getContext(),"Yajman does not exist.",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getContext(),"Yajman does not exist.",Toast.LENGTH_SHORT).show();
                 }else{
                    fullName.setText(vanshawal.get(0).getFirst_name() + " " + vanshawal.get(0).getMiddle_name() + " " + vanshawal.get(0).getLast_name());
                    cityName.setText(vanshawal.get(0).getCity());
@@ -105,12 +110,30 @@ public class DetailFragment extends Fragment {
                    deathAnniversary.setText(vanshawal.get(0).getDeath_anniversary());
                    relationName.setText(vanshawal.get(0).getRelation());
                    gender.setText(vanshawal.get(0).getGender());
-                   yourFullName.setText(vanshawal.get(0).getYajman());
-                   fatherFullName.setText(vanshawal.get(0).getFather());
-                   motherFullName.setText(vanshawal.get(0).getMother());
-                   grandpaName.setText(vanshawal.get(0).getGrandpa());
-                   panjobaName.setText(vanshawal.get(0).getPanjoba());
-                   niPanjobaName.setText(vanshawal.get(0).getNipanjoba());
+
+                   SpannableString fName = new SpannableString(vanshawal.get(0).getYajman());
+                   fName.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getYajman().length(), 0);
+                   yourFullName.setText(fName);
+
+                   SpannableString fatherName = new SpannableString(vanshawal.get(0).getFather());
+                   fatherName.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getFather().length(), 0);
+                   fatherFullName.setText(fatherName);
+
+                   SpannableString motherName = new SpannableString(vanshawal.get(0).getMother());
+                   motherName.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getMother().length(), 0);
+                   motherFullName.setText(motherName);
+
+                   SpannableString grandpa = new SpannableString(vanshawal.get(0).getGrandpa());
+                   grandpa.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getGrandpa().length(), 0);
+                   grandpaName.setText(grandpa);
+
+                   SpannableString panjoba = new SpannableString(vanshawal.get(0).getPanjoba());
+                   panjoba.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getPanjoba().length(), 0);
+                   panjobaName.setText(panjoba);
+
+                   SpannableString nipanjoba = new SpannableString(vanshawal.get(0).getNipanjoba());
+                   nipanjoba.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getNipanjoba().length(), 0);
+                   niPanjobaName.setText(nipanjoba);
 
                    //Real Uncle
                    String real_uncle_name_string = vanshawal.get(0).getReal_uncle();
@@ -127,7 +150,7 @@ public class DetailFragment extends Fragment {
                            s.setSpan(new BulletSpan(15), 0, real_uncle_array[i].length(), 0);
                            t1[i] = new TextView(getActivity());
                            t1[i].setText(s);
-                           t1[i].setTextSize(18);
+                           t1[i].setTextSize(14);
                            L1.addView(t1[i]);
                        }
                    }else{
@@ -150,7 +173,7 @@ public class DetailFragment extends Fragment {
                            s.setSpan(new BulletSpan(15), 0, cousin_uncle_array[i].length(), 0);
                            t2[i] = new TextView(getActivity());
                            t2[i].setText(s);
-                           t2[i].setTextSize(18);
+                           t2[i].setTextSize(14);
                            L2.addView(t2[i]);
                        }
                    }else{
@@ -173,7 +196,7 @@ public class DetailFragment extends Fragment {
                            s.setSpan(new BulletSpan(15), 0, real_uncle_son_array[i].length(), 0);
                            t3[i] = new TextView(getActivity());
                            t3[i].setText(s);
-                           t3[i].setTextSize(18);
+                           t3[i].setTextSize(14);
                            L3.addView(t3[i]);
                        }
                    }else{
@@ -196,7 +219,7 @@ public class DetailFragment extends Fragment {
                             s.setSpan(new BulletSpan(15), 0, cousin_uncle_son_array[i].length(), 0);
                             t4[i] = new TextView(getActivity());
                             t4[i].setText(s);
-                            t4[i].setTextSize(18);
+                            t4[i].setTextSize(14);
                             L4.addView(t4[i]);
                        }
                    }else{
@@ -219,7 +242,7 @@ public class DetailFragment extends Fragment {
                             s.setSpan(new BulletSpan(15), 0, real_brother_array[i].length(), 0);
                             t5[i] = new TextView(getActivity());
                             t5[i].setText(s);
-                            t5[i].setTextSize(18);
+                            t5[i].setTextSize(14);
                             L5.addView(t5[i]);
                         }
                    }else{
@@ -242,7 +265,7 @@ public class DetailFragment extends Fragment {
                            s.setSpan(new BulletSpan(15), 0, real_brother_son_array[i].length(), 0);
                            t6[i] = new TextView(getActivity());
                            t6[i].setText(s);
-                           t6[i].setTextSize(18);
+                           t6[i].setTextSize(14);
                            L6.addView(t6[i]);
                        }
                    }else{
@@ -265,7 +288,7 @@ public class DetailFragment extends Fragment {
                            s.setSpan(new BulletSpan(15), 0, real_son_array[i].length(), 0);
                            t7[i] = new TextView(getActivity());
                            t7[i].setText(s);
-                           t7[i].setTextSize(18);
+                           t7[i].setTextSize(14);
                            L7.addView(t7[i]);
                        }
                    }else{
@@ -273,8 +296,15 @@ public class DetailFragment extends Fragment {
                       t.setText("-");
                       L7.addView(t);
                    }
-                   mobileNo.setText(vanshawal.get(0).getMobile());
-                   tipText.setText(vanshawal.get(0).getTip());
+
+                   SpannableString sMobile = new SpannableString(vanshawal.get(0).getMobile());
+                   sMobile.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getMobile().length(), 0);
+                   mobileNo.setText(sMobile);
+
+                   SpannableString sTip = new SpannableString(vanshawal.get(0).getTip());
+                   sTip.setSpan(new BulletSpan(15), 0, vanshawal.get(0).getTip().length(), 0);
+                   tipText.setText(sTip);
+
                    signatureImagePath = vanshawal.get(0).getSignatureImagePath();
                    Log.d("signatureImagePath", signatureImagePath);
                    signatureSplit = signatureImagePath.split("/");

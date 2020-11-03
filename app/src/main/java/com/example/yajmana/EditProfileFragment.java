@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,7 @@ public class EditProfileFragment extends Fragment {
     EditText firstName, middleName, lastName, profileMobile, profileEmail;
     Button saveProfile, cancelEditProfile;
     String first_name, middle_name, last_name, profile_mobile, profile_email;
+    ProgressBar progressBar;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -43,6 +45,8 @@ public class EditProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d("onCreateView", "Inside EditProfileFragment onCreateView()");
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        progressBar = view.findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.VISIBLE);
         ImageView img = view.findViewById(R.id.profileImageView);
         Glide.with(this)
                 .load(R.drawable.profile_image)
@@ -89,6 +93,7 @@ public class EditProfileFragment extends Fragment {
                         profileMobile.setText(profile.get(0).getMobileNo());
                         profileEmail.setText(profile.get(0).getEmail());
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
                 @Override
                 public void onFailure(Call<List<Profile>> call, Throwable t) {

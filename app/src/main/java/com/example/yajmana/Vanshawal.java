@@ -31,6 +31,10 @@ public class Vanshawal {
         return late_fullname;
     }
 
+    public String getFullName(){
+        return first_name +' '+ middle_name +' '+ last_name;
+    }
+
     public String getCity() {
         return city;
     }

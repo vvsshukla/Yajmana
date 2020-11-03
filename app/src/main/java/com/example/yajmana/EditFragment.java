@@ -31,15 +31,12 @@ public class EditFragment extends Fragment {
     int real_brother_son_count, real_brother_son_count_id_start, real_brother_son_count_id, real_brother_son_button_id;
     int son_count, son_count_id_start, son_count_id, son_button_id;
     int MAXSIZE = 10;
-    //int id1_cnt, id2_cnt, id3_cnt, id4_cnt, id5_cnt, id6_cnt, id7_cnt;
-
     EditText fullName, cityName, talukaName, districtName, casteName, deathAnniversary, relationName;
     EditText yourFullName, fatherFullName, motherFullName, grandpaName, panjobaName, niPanjobaName;
     EditText mobileNo, tipText, dynamic;
     Button btnUpdate, btnCancel;
     LinearLayout L1, L2, L3, L4, L5, L6, L7;
     LinearLayout dynamicL1[], dynamicL2[], dynamicL3[], dynamicL4[], dynamicL5[], dynamicL6[], dynamicL7[];
-    //int id1[], id2[], id3[], id4[], id5[], id6[], id7[];
     EditText t1, t2, t3, t4, t5, t6, t7;
     TextView add_more_real_uncle, add_more_cousin_uncle, add_more_real_uncle_son, add_more_cousin_uncle_son, add_more_real_brother, add_more_real_brother_son, add_more_son;
     EditText e1, e2, e3, e4, e5, e6, e7;

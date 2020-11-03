@@ -12,6 +12,13 @@ tools:context=".DetailFragment">
     android:padding="8dp"
     android:layout_marginBottom="40dp">
 
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:id="@+id/swa_vyaktichi_mahiti"
         android:layout_width="wrap_content"
@@ -108,8 +115,8 @@ tools:context=".DetailFragment">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp">
 
         <!-- taluka -->
         <TextView
@@ -175,8 +182,8 @@ tools:context=".DetailFragment">
             android:id="@+id/LayoutThreeTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="0.5">
 
             <TextView
@@ -243,8 +250,8 @@ tools:context=".DetailFragment">
             android:id="@+id/LayoutFourTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="0.5">
 
             <TextView
@@ -276,23 +283,31 @@ tools:context=".DetailFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LayoutFour"
-        android:layout_marginTop="20dp"
-        android:weightSum="1"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/genderLabel"
-            android:layout_width="430dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/gender"
             android:layout_weight="0.5"
             android:padding="10dp"
             android:textSize="14sp"
             />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/LayoutGender"
+        android:id="@+id/LayoutGenderValue"
+        android:weightSum="1">
         <TextView
             android:id="@+id/genderValue"
-            android:layout_width="430dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:textSize="14sp"
@@ -300,14 +315,13 @@ tools:context=".DetailFragment">
             android:background="@drawable/oval"
             android:padding="10dp"
             />
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/LayoutFive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LayoutGender"
+        android:layout_below="@+id/LayoutGenderValue"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
@@ -318,13 +332,6 @@ tools:context=".DetailFragment">
             android:text="@string/relative_details"
             android:textSize="18sp"
             />
-
-<!--        <TextView-->
-<!--            android:id="@+id/pooja_person_vanshawal"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:text="@string/add_button_tip" />-->
 
     </LinearLayout>
 
@@ -338,6 +345,21 @@ tools:context=".DetailFragment">
         android:weightSum="1">
 
         <!-- tumche purna nav -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/your_full_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/your_full_name_label"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:background="@drawable/oval"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/your_full_name"
@@ -345,8 +367,24 @@ tools:context=".DetailFragment">
             android:layout_height="wrap_content"
             android:hint="@string/your_full_name_label"
             android:importantForAutofill="no"
-            android:padding="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/fathers_full_name_label"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:hint="@string/fathers_full_name"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/fathers_full_name"
@@ -354,10 +392,26 @@ tools:context=".DetailFragment">
             android:layout_height="wrap_content"
             android:hint="@string/fathers_full_name"
             android:importantForAutofill="no"
-            android:padding="10dp" android:layout_marginTop="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
 
-        <!-- vadilanche purna nav -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/mothers_full_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:hint="@string/mothers_full_name"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/mothers_full_name"
@@ -366,8 +420,27 @@ tools:context=".DetailFragment">
             android:ems="10"
             android:hint="@string/mothers_full_name"
             android:importantForAutofill="no"
-            android:padding="10dp" android:layout_marginTop="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/grandpa_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/grandpa_name"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/grandpa_name"
@@ -375,8 +448,27 @@ tools:context=".DetailFragment">
             android:layout_height="wrap_content"
             android:hint="@string/grandpa_name"
             android:importantForAutofill="no"
-            android:padding="10dp" android:layout_marginTop="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/panjoba_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="@string/panjoba_name"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/panjoba_name"
@@ -384,8 +476,28 @@ tools:context=".DetailFragment">
             android:layout_height="wrap_content"
             android:hint="@string/panjoba_name"
             android:importantForAutofill="no"
-            android:padding="10dp" android:layout_marginTop="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/ni_panjoba_name_label"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ni_panjoba_name"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/oval"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/ni_panjoba_name"
@@ -394,42 +506,56 @@ tools:context=".DetailFragment">
             android:ems="10"
             android:hint="@string/ni_panjoba_name"
             android:importantForAutofill="no"
-            android:padding="10dp" android:layout_marginTop="10dp"
-            android:background="@drawable/oval"/>
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
 
-        <!-- Real Uncle NAme -->
-        <TextView
-            android:id="@+id/real_uncle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:importantForAutofill="no"
-            android:padding="10dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/real_uncle_name"
-        android:background="@drawable/oval"/>
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <!-- Real Uncle Name -->
+            <TextView
+                android:id="@+id/real_uncle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/real_uncle_name"
+                android:background="@drawable/oval"
+                />
+            <!--android:textSize="18sp"-->
+        </LinearLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/real_uncle_name"
-    android:ems="10"
-    android:padding="10dp"
-    android:layout_marginTop="10dp"
-    android:orientation="vertical">
-
-</LinearLayout>
-
-        <TextView
-            android:id="@+id/cousin_uncle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            android:text="@string/cousin_uncle_name"
+            android:id="@+id/real_uncle_name"
+            android:ems="10"
             android:padding="10dp"
-            android:background="@drawable/oval" />
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/cousin_uncle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:importantForAutofill="no"
+                android:layout_marginTop="20dp"
+                android:text="@string/cousin_uncle_name"
+                android:padding="10dp"
+                android:background="@drawable/oval" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -442,15 +568,21 @@ tools:context=".DetailFragment">
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/real_uncle_son"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/real_uncle_son_name"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/oval" />
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/real_uncle_son"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/real_uncle_son_name"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@drawable/oval" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -463,17 +595,24 @@ tools:context=".DetailFragment">
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/cousin_uncle_son"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="@string/cousin_uncle_son_name"
-            android:importantForAutofill="no"
-            android:layout_marginTop="20dp" android:padding="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/oval"
-            />
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/cousin_uncle_son"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:text="@string/cousin_uncle_son_name"
+                android:importantForAutofill="no"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@drawable/oval"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -487,17 +626,23 @@ tools:context=".DetailFragment">
         </LinearLayout>
 
         <!-- Real Brother Name -->
-        <TextView
-            android:id="@+id/real_brother"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/real_brother_name"
-            android:importantForAutofill="no"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/oval"
-            />
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/real_brother"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/real_brother_name"
+                android:importantForAutofill="no"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@drawable/oval"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -511,15 +656,21 @@ tools:context=".DetailFragment">
         </LinearLayout>
 
         <!-- Real Brother Son -->
-        <TextView
-           android:id="@+id/real_brother_son"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="@string/real_brother_son_name"
-           android:importantForAutofill="no"
-           android:layout_marginTop="20dp"
-           android:textSize="18sp"
-           android:padding="10dp" android:background="@drawable/oval"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+               android:id="@+id/real_brother_son"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="0.5"
+               android:text="@string/real_brother_son_name"
+               android:importantForAutofill="no"
+               android:layout_marginTop="20dp"
+               android:padding="10dp" android:background="@drawable/oval"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -532,18 +683,24 @@ tools:context=".DetailFragment">
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/son"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="@string/son_name"
-            android:importantForAutofill="no"
-            android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            android:padding="10dp"
-            android:background="@drawable/oval"
-            />
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/son"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:text="@string/son_name"
+                android:importantForAutofill="no"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@drawable/oval"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -556,63 +713,77 @@ tools:context=".DetailFragment">
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/mobile"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="@string/mobile_no"
-            android:importantForAutofill="no"
-            android:textSize="18sp"
-            android:padding="10dp" android:layout_marginTop="20dp"
-            android:background="@drawable/oval"/>
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:text="@string/mobile_no"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/oval"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/mobile_no"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="18sp"
-            android:importantForAutofill="no"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            />
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/mobile_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/tip_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/oval"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:padding="10dp"
+                android:text="@string/tip" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="@string/tip"
             android:importantForAutofill="no"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/oval"/>
-
-        <TextView
-            android:id="@+id/tipText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:textSize="18sp"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:gravity="center_horizontal"
-            android:weightSum="2"
-            android:background="@drawable/oval">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/signatureLabel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/signature"
                 android:importantForAutofill="no"
@@ -621,14 +792,24 @@ tools:context=".DetailFragment">
                 android:layout_weight="1"
                 />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:id="@+id/signatureImage"
-                android:layout_weight="1"
                 android:padding="10dp"
+                android:background="@drawable/border_signature"
                 android:contentDescription="@string/signature" />
 
         </LinearLayout>

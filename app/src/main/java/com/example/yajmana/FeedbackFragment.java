@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +28,7 @@ public class FeedbackFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private List<Feedback> feedbacks;
     private FloatingActionButton fab_add_feedback;
+    private ProgressBar progressBar;
 
     public FeedbackFragment() {
         // Required empty public constructor
@@ -41,6 +43,8 @@ public class FeedbackFragment extends Fragment {
         recyclerView = view.findViewById(R.id.feedback_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         loadRecyclerViewData();
         fab_add_feedback = view.findViewById(R.id.fab_add_feedback);
         fab_add_feedback.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +65,7 @@ public class FeedbackFragment extends Fragment {
                 Log.e("Feedback JSON:",new Gson().toJson(response.body()));
                 adapter = new FeedbackAdapter(feedbacks, getContext());
                 recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -74,5 +79,4 @@ public class FeedbackFragment extends Fragment {
     private void open_new_feedback() {
         ((NavigateActivity)getActivity()).loadFragment(new AddFeedbackFragment(),getString(R.string.new_feedback));
     }
-
 }

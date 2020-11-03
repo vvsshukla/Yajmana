@@ -16,12 +16,15 @@ public class AddFeedbackFragment extends Fragment {
 
     Button feedbackSave, feedbackCancel;
     EditText vanshawalCodeText;
+    EditText fullNameText;
     EditText contentText;
     private String feedbackContent;
     private String vanshawalCode;
+    private String fullName;
     public AddFeedbackFragment() {}
-    public AddFeedbackFragment( String vanshawalCode ) {
+    public AddFeedbackFragment( String vanshawalCode, String fullName ) {
         this.vanshawalCode = vanshawalCode;
+        this.fullName = fullName;
     }
 
     @Override
@@ -31,37 +34,59 @@ public class AddFeedbackFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_feedback, container, false);
         feedbackSave = view.findViewById(R.id.feedback_save);
         feedbackCancel = view.findViewById(R.id.feedback_cancel);
-        vanshawalCodeText=view.findViewById(R.id.vanshawal_no);
-        vanshawalCodeText.setText(this.vanshawalCode);
+        fullNameText = view.findViewById(R.id.full_name);
+        vanshawalCodeText = view.findViewById(R.id.vanshawal_no);
         contentText = view.findViewById(R.id.content_text);
+        if((this.vanshawalCode!=null && !this.vanshawalCode.trim().isEmpty()) && (this.fullName!=null && !this.fullName.trim().isEmpty())){
+            vanshawalCodeText.setText(this.vanshawalCode);
+            fullNameText.setText(this.fullName);
+        }
         feedbackSave.setOnClickListener(view1 -> saveFeedback());
         feedbackCancel.setOnClickListener(view12 -> cancelFeedback());
         return view;
     }
 
-    private void saveFeedback() {
+    public boolean isValidInput(){
+        fullName = fullNameText.getText().toString();
         vanshawalCode = vanshawalCodeText.getText().toString();
         feedbackContent = contentText.getText().toString();
+        Log.d("fullName",fullName);
         Log.d("vanshwalCode",vanshawalCode);
         Log.d("content",feedbackContent);
-        Call<LoginResponse> call = Api.getClient().addFeedback(vanshawalCode, feedbackContent);
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.d("Response", "Status: " + response.body().getSuccess() + ", Message: "+ response.body().getMessage());
-                if (response.body().getSuccess().equals("1")){
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.feedback_added), Toast.LENGTH_SHORT).show();
-                    ((NavigateActivity)getActivity()).loadFragment(new FeedbackFragment(), getString(R.string.feedback_heading));
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.feedback_not_added), Toast.LENGTH_SHORT).show();
-                }
-            }
+        if(fullName==null || fullName.trim().isEmpty()){
+           Toast.makeText(getActivity().getApplicationContext(), getString(R.string.vanshawal_no_validation), Toast.LENGTH_SHORT).show();
+           return false;
+        }else if(feedbackContent == null || feedbackContent.trim().isEmpty()){
+           Toast.makeText(getActivity().getApplicationContext(), getString(R.string.feedback_content_validation), Toast.LENGTH_SHORT).show();
+           return false;
+        }
+        return true;
+    }
 
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.d("onFailure:", "Error:"+ t.toString());
-            }
-        });
+    private void saveFeedback() {
+        boolean isInputValid = isValidInput();
+        if(isInputValid){
+            Call<LoginResponse> call = Api.getClient().addFeedback(fullName, vanshawalCode, feedbackContent);
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    Log.d("Response", "Status: " + response.body().getSuccess() + ", Message: "+ response.body().getMessage());
+                    if (response.body().getSuccess().equals("1")){
+                       Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                       ((NavigateActivity)getActivity()).loadFragment(new FeedbackFragment(), getString(R.string.feedback_heading));
+                    } else if(response.body().getSuccess().equals("-1")){
+                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Log.d("onFailure:", "Error:"+ t.toString());
+                }
+            });
+        }
     }
 
     private void cancelFeedback() {

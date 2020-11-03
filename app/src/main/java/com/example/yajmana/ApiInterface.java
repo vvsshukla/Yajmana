@@ -18,6 +18,7 @@ public interface ApiInterface {
     @FormUrlEncoded // annotation used in POST type requests
     //Verify Login
     @POST("/yajmana/login.php") Call<LoginResponse> checkLogin( @Field("username") String username, @Field("password") String password );
+    //@POST("/yajmana/logout.php") Call<LoginResponse> logout();
 
     //Vanshawal
     @FormUrlEncoded
@@ -51,7 +52,7 @@ public interface ApiInterface {
     @GET("yajmana/feedback/read.php") Call<List<Feedback>> getFeedback();
 
     @FormUrlEncoded
-    @POST("yajmana/feedback/add.php") Call<LoginResponse> addFeedback( @Field("vanshawal_code") String vanshawalCode, @Field("content") String content);
+    @POST("yajmana/feedback/add.php") Call<LoginResponse> addFeedback(@Field("full_name") String full_name, @Field("vanshawal_code") String vanshawalCode, @Field("content") String content);
 
     @FormUrlEncoded
     @Headers("Cache-Control:no-cache")

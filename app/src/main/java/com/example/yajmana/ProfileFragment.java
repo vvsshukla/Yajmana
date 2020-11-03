@@ -1,5 +1,6 @@
 package com.example.yajmana;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class ProfileFragment extends Fragment {
 
     TextView fullName, email, mobileNo;
     ImageView imageView1, imageView2, imageView3;
+    ProgressBar progressBar;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -45,6 +48,8 @@ public class ProfileFragment extends Fragment {
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        progressBar = view.findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.VISIBLE);
         ((NavigateActivity)getActivity()).setActionBarTitle(getString(R.string.profile_heading));
         fullName = view.findViewById(R.id.profile_name_value);
         mobileNo = view.findViewById(R.id.profile_mobile);
@@ -94,6 +99,7 @@ public class ProfileFragment extends Fragment {
                    mobileNo.setText(profile.get(0).getMobileNo());
                    email.setText(profile.get(0).getEmail());
                 }
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<List<Profile>> call, Throwable t) {

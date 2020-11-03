@@ -15,7 +15,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="vanshawal_heading">Vanshawal</string>
     <string name="title_activity_navigate">NavigateActivity</string>
-    <string name="empty_text">कोणतीही रेकॉर्ड आढळली नाहीत.</string>
+    <string name="empty_text">कोणतीही रेकॉर्ड सापडली नाही.</string>
     <string name="title_home">यादी</string>
     <string name="title_dashboard">Feedback</string>
     <string name="title_notifications">Broadcast</string>
@@ -48,7 +48,7 @@
     <string name="city">City</string>
     <string name="yajman_s_full_name">Yajman\'s Full Name</string>
     <string name="caste">समाज</string>
-    <string name="date_of_death">स्मृती दिन</string>
+    <string name="date_of_death">स्मृती दिन (उदा.01–01–1970)</string>
     <string name="mobile_no">मोबाइल नं.</string>
     <string name="mobile_no_label">मोबाइल क्र.</string>
     <string name="person_s_photo">Person\'s Photo</string>
@@ -117,16 +117,15 @@
     <string name="feedback_content_hint">अभिप्राय संदेश लिहा.</string>
     <string name="save">जमा करा</string>
     <string name="cancel">रद्द करा</string>
-<!--<string name="more">संपूर्ण माहिती</string>-->
+    <string name="vanshawal_no_validation">वंशावळ क्रमांक आवश्यक.</string>
     <string name="more">तपशील</string>
     <string name="feedback_added">अभिप्राय जमा. धन्यवाद.</string>
-    <string name="feedback_not_added">अभिप्राय जमा होण्यात असफल. पुन्हा प्रयत्न करा.</string>
+    <string name="feedback_not_added">अभिप्राय असफल. पुन्हा प्रयत्न करा.</string>
     <string name="saveSignature">Save</string>
     <string name="clearSignature">Clear</string>
     <string name="letterHeadOne">अधिकार पत्र १</string>
     <string name="letterHeadTwo">अधिकार पत्र २</string>
     <string name="letterHeadThree">अधिकार पत्र ३</string>
-<!--<string name="edit">माहिती बदल</string>-->
     <string name="edit">संपादन</string>
     <string name="feedback">अभिप्राय</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -139,4 +138,7 @@
     <string name="gender">लिंग</string>
     <string name="gender_hint">स्त्री / पुरुष</string>
     <string name="relative_details">नातेवाईकांविषयी माहिती</string>
+    <string name="female_string">स्त्री</string>
+    <string name="logout">Logout</string>
+    <string name="feedback_content_validation">अभिप्राय संदेश आवश्यक.</string>
 </resources>

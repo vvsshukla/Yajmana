@@ -1,5 +1,6 @@
 package com.example.yajmana;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,15 +48,15 @@ public class VanshawalAdapter extends RecyclerView.Adapter<VanshawalAdapter.Vans
         holder.death_anniversary.setText(vanshawalList.get(position).getDeath_anniversary());
         holder.mobile_no.setText(vanshawalList.get(position).getMobile());
         String gender = vanshawalList.get(position).getGender();
-
-        if(gender.equals("Female")){
+        //Female image
+        if(gender.equals(ctx.getResources().getString(R.string.female_string))){
             holder.image.setBackgroundResource(R.drawable.person_female);
         }
 
         holder.btnFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                go_to_feedback(vanshawalList.get(position).getVanshawal_no());
+                go_to_feedback(vanshawalList.get(position).getVanshawal_no(), vanshawalList.get(position).getYajman());
             }
         });
 
@@ -87,8 +88,8 @@ public class VanshawalAdapter extends RecyclerView.Adapter<VanshawalAdapter.Vans
         Log.d("Detail fragment","Detail fragment loaded.");
     }
 
-    private void go_to_feedback(String vanshawalNo){
-        fragment = new AddFeedbackFragment(vanshawalNo);
+    private void go_to_feedback(String vanshawalNo, String yajman){
+        fragment = new AddFeedbackFragment(vanshawalNo, yajman);
         NavigateActivity navigateActivity = ( NavigateActivity ) this.ctx;
         navigateActivity.loadFragment(fragment, navigateActivity.getString(R.string.new_feedback));
     }

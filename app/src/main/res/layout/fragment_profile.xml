@@ -18,17 +18,27 @@
         android:background="@color/colorPrimary"
         android:layout_alignParentLeft="true" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
     <ScrollView
         android:id="@+id/scrolView_account"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <RelativeLayout
             android:id="@+id/linear_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -239,6 +249,7 @@
             </RelativeLayout>
 
         </RelativeLayout>
+
     </ScrollView>
 
 </RelativeLayout>

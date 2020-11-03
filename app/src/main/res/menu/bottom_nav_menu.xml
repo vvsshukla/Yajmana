@@ -6,12 +6,6 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/list"
         android:title="@string/title_home" />
-
-    <!--<item
-        android:id="@+id/app_bar_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/search"
-        app:actionViewClass="android.widget.SearchView" />-->
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/feedback"
@@ -25,4 +19,9 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/user"
         android:title="@string/title_profile" />
+    <item
+        android:id="@+id/navigation_logout"
+        android:icon="@drawable/logout24"
+        android:title="@string/logout"
+        />
 </menu>
