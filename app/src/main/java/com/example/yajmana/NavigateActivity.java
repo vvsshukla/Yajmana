@@ -1,4 +1,5 @@
 package com.example.yajmana;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import com.example.yajmana.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -77,9 +79,15 @@ public class NavigateActivity extends AppCompatActivity implements BottomNavigat
                     .commit();
             getSupportActionBar().setTitle(title);
             if(fragment instanceof HomeFragment){
+//                Log.d("fragmentname", "Home");
                 navView = findViewById(R.id.nav_view);
                 menu = navView.getMenu();
                 menu.getItem(0).setChecked(true);
+            } else if(fragment instanceof AddFeedbackFragment) {
+//                Log.d("fragmentname", "AddFeedbackFragment");
+                navView = findViewById(R.id.nav_view);
+                menu = navView.getMenu();
+                menu.getItem(1).setChecked(true);
             }
             return true;
         }
@@ -98,17 +106,35 @@ public class NavigateActivity extends AppCompatActivity implements BottomNavigat
     }
 
     public boolean logout(){
-        Toast.makeText(NavigateActivity.this.getApplicationContext(), "Logging Out", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent( NavigateActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finish();
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Do do my action here
+                Toast.makeText(NavigateActivity.this.getApplicationContext(), "Logging Out", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent( NavigateActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // I do not need any action here you might
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
         return false;
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        Log.d("backPress", "Backpress disabled");
+        Log.d("backPress", "Backpress");
     }
 }

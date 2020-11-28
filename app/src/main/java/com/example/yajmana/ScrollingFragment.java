@@ -1,3 +1,4 @@
+
 package com.example.yajmana;
 
 import android.Manifest;
@@ -49,7 +50,6 @@ import retrofit2.Response;
 public class ScrollingFragment extends Fragment {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
     int real_uncle_count, real_uncle_count_id_start, real_uncle_count_id, real_uncle_button_id;
     int cousin_uncle_count, cousin_uncle_count_id_start, cousin_uncle_count_id, cousin_uncle_button_id;
     int real_uncle_son_count, real_uncle_son_count_id_start, real_uncle_son_count_id, real_uncle_son_button_id;
@@ -57,15 +57,12 @@ public class ScrollingFragment extends Fragment {
     int real_brother_count, real_brother_count_id_start, real_brother_count_id, real_brother_button_id;
     int real_brother_son_count, real_brother_son_count_id_start, real_brother_son_count_id, real_brother_son_button_id;
     int son_count, son_count_id_start, son_count_id, son_button_id;
-
     EditText fullName, cityName, talukaName, districtName, casteName, deathAnniversary, relationName;
     EditText yourFullName, fatherFullName, motherFullName, grandpaName, panjobaName, niPanjobaName;
     EditText real_uncle_name, cousin_uncle_name, real_uncle_son_name, cousin_uncle_son_name, real_brother_name, real_brother_son_name, son_name;
     EditText mobileNo, tipText, dynamic;
     EditText e1, e2, e3, e4, e5, e6, e7;
-
     TextView add_more_real_uncle, add_more_cousin_uncle, add_more_real_uncle_son, add_more_cousin_uncle_son, add_more_real_brother, add_more_real_brother_son, add_more_son;
-
     LinearLayout[] parentL1, parentL2, parentL3, parentL4, parentL5, parentL6, parentL7;
     LinearLayout dynamicL1, dynamicL2, dynamicL3, dynamicL4, dynamicL5, dynamicL6, dynamicL7, parent;
     Button B1, B2, B3, B4, B5, B6, B7, saveSignature, clearSignature;
@@ -198,19 +195,14 @@ public class ScrollingFragment extends Fragment {
                 add_more_real_brother_son();
             }
         });
-        add_more_son.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                add_more_son();
-            }
-        });
+        add_more_son.setOnClickListener(view13 -> add_more_son());
         initiateSignature(view);
         return view;
     }
 
+    //Create Horizontal Linear Layout
     @SuppressLint("ResourceType")
     private void add_more_real_uncle() {
-        //Create Horizontal Linear Layout
         if(this.real_uncle_count < 10){
             parentL1[this.real_uncle_count] = new LinearLayout(getContext());
             LinearLayout p = parentL1[this.real_uncle_count];
@@ -625,7 +617,6 @@ public class ScrollingFragment extends Fragment {
                         }
                         break;
         }
-
     }
 
     @Override
@@ -670,42 +661,46 @@ public class ScrollingFragment extends Fragment {
         int selectedId = genderGroup.getCheckedRadioButtonId();
         btnGender = view.findViewById(selectedId);
         tipText = view.findViewById(R.id.tip);
-
-        if(!yourFullName.getText().toString().equals("") && genderGroup.getCheckedRadioButtonId()!=-1)
-        {
-            Log.d("Validation","Success");
-            return true;
-        } else if (genderGroup.getCheckedRadioButtonId()==-1) {
-            Log.d("Validation","Failure");
+        Log.d("mobile no", "Value:"+mobileNo.getText().toString());
+        if(mobileNo.getText().toString().equals("") && mobileNo.getText().length() != 10) {
+            Log.d("Validation Mobile", "Failure");
+            Toast.makeText(getContext(), "१० अंकी मोबाईल क्र. प्रविष्ट करा.", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(genderGroup.getCheckedRadioButtonId()==-1) {
+            Log.d("Validation Gender","Failure");
             Toast.makeText(getActivity(), "लिंग नमूद करणे आवश्यक.", Toast.LENGTH_SHORT).show();
             return false;
+        } else if(!yourFullName.getText().toString().equals("") && genderGroup.getCheckedRadioButtonId()!=-1 && !mobileNo.getText().toString().equals("")) {
+            Log.d("Validation","Success");
+            return true;
         } else {
             Log.d("Validation","Failure");
-            Toast.makeText(getActivity(), "किमान एक माहिती भरणे आवश्यक आहे.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "लिंग, पूर्ण नाव, मोबाईल क्र. भरणे आवश्यक.", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     private void initiateSignature(View view) {
         signaturePad = view.findViewById(R.id.signature_pad);
-        saveSignature = view.findViewById(R.id.saveSignature);
+        //saveSignature = view.findViewById(R.id.saveSignature);
         clearSignature = view.findViewById(R.id.clearSignature);
         verifyStoragePermissions(getActivity());
         signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(getContext(), "OnStartSigning", Toast.LENGTH_SHORT).show();
+                Log.d("startSigning", "OnStartSigning");
+                //Toast.makeText(getContext(), "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSigned() {
-                saveSignature.setEnabled(true);
+                //saveSignature.setEnabled(true);
                 clearSignature.setEnabled(true);
             }
 
             @Override
             public void onClear() {
-                saveSignature.setEnabled(false);
+                //saveSignature.setEnabled(false);
                 clearSignature.setEnabled(false);
             }
 
@@ -717,30 +712,22 @@ public class ScrollingFragment extends Fragment {
             }
 
         });
-        saveSignature.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
-                realPath = Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Log.d("success", "Jpg signature saved into the Gallery.");
-                    Toast.makeText(getContext(), "Jpg Signature saved into the Gallery.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("failure", "Unable to store the signature.");
-                    Toast.makeText(getContext(), "Unable to store the signature.", Toast.LENGTH_SHORT).show();
-                }
-                 /*
-                    if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
-                        Log.d("success", "SVG Signature saved into the Gallery.");
-                        Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+        /*
+            saveSignature.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
+                    realPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
+                    if (addJpgSignatureToGallery(signatureBitmap)) {
+                        Log.d("success", "Jpg signature saved into the Gallery.");
+                        Toast.makeText(getContext(), "Jpg Signature saved into the Gallery.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Log.d("failure", "Unable to store the SVG signature.");
-                        Toast.makeText(getContext(), "Unable to store the SVG signature.", Toast.LENGTH_SHORT).show();
+                        Log.d("failure", "Unable to store the signature.");
+                        Toast.makeText(getContext(), "Unable to store the signature.", Toast.LENGTH_SHORT).show();
                     }
-                 */
-            }
-        });
+                }
+            });
+        */
     }
 
     public void add_vanshawal_record(){
@@ -844,17 +831,20 @@ public class ScrollingFragment extends Fragment {
             }
         }
         Log.d("Son", son);
-
         mobileno = mobileNo.getText().toString().trim();
         tip = tipText.getText().toString().trim();
         genderString = btnGender.getText().toString().trim();
-        //if(signatureImagePath!=null && signatureImagePath.equals("")){
-           //signatureImageUri = Uri.parse("file://"+signatureImagePath);
-           uploadFile(signatureImagePath, "Signature Image");
-        /*}else{
-           Log.d("updateYajamana", "Inside updateYajamana()");
-           updateYajamana();
-        }*/
+
+        Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
+        realPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
+        if (addJpgSignatureToGallery(signatureBitmap)) {
+            Log.d("success", "Jpg signature saved into the Gallery.");
+            Toast.makeText(getContext(), "Jpg Signature saved into the Gallery.", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d("failure", "Unable to store the signature.");
+            Toast.makeText(getContext(), "Unable to store the signature.", Toast.LENGTH_SHORT).show();
+        }
+        uploadFile(signatureImagePath, "Signature Image");
     }
 
     private void uploadFile(String selectedImageUrl, String desc ){
@@ -885,33 +875,28 @@ public class ScrollingFragment extends Fragment {
     }
 
     private void updateYajamana(){
-        //if(serverImagePath!=null && !serverImagePath.equals("")){
-            Call<SignUpResponse> call = Api.getClient().createVanshawal(late_fullname, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, genderString, tip, serverImagePath);
-            call.enqueue(new Callback<SignUpResponse>() {
-                @Override
-                public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                    Log.d("UpdateResponse", "Status: " + response.body().getResponseCode() + ", Message: "+ response.body().getMessage());
-                    if( response.body().getResponseCode() == 1 ) {
-                        Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा.",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getActivity().getApplicationContext(),NavigateActivity.class));
-                        getActivity().finish();
-                    } else if (response.body().getResponseCode() == 2) {
-                        Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत पूर्वीपासूनच अस्तित्वात आहे.",Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा होण्यास असफल.",Toast.LENGTH_SHORT).show();
-                    }
+        Call<SignUpResponse> call = Api.getClient().createVanshawal(late_fullname, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, genderString, tip, serverImagePath);
+        call.enqueue(new Callback<SignUpResponse>() {
+            @Override
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                Log.d("UpdateResponse", "Status: " + response.body().getResponseCode() + ", Message: "+ response.body().getMessage());
+                if( response.body().getResponseCode() == 1 ) {
+                    Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा.",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity().getApplicationContext(),NavigateActivity.class));
+                    getActivity().finish();
+                } else if (response.body().getResponseCode() == 2) {
+                    Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत पूर्वीपासूनच अस्तित्वात आहे.",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा होण्यास असफल.",Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Error:"+ t.toString(),Toast.LENGTH_SHORT).show();
-                    Log.d("onFailure:", "Error:"+ t.toString());
-                }
-            });
-//        }else{
-//            Toast.makeText(getContext(), "Unable to upload signature", Toast.LENGTH_LONG).show();
-//            Log.d("UploadResult", "Unable to upload signature");
-//        }
+            @Override
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Error:"+ t.toString(),Toast.LENGTH_SHORT).show();
+                Log.d("onFailure:", "Error:"+ t.toString());
+            }
+        });
     }
 
     private void scanMediaFile(File photo) {

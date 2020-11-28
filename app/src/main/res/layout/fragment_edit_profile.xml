@@ -97,6 +97,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
                         android:textColorHint="@color/colorPrimary">
 
                         <EditText
@@ -114,6 +116,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
                         android:textColorHint="@color/colorPrimary">
 
                         <EditText
@@ -131,6 +135,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
                         android:textColorHint="@color/colorPrimary">
 
                         <EditText
@@ -150,6 +156,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="55dp"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     android:textColorHint="@color/colorPrimary">
 
                     <EditText
@@ -167,6 +175,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="55dp"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     android:textColorHint="@color/colorPrimary">
 
                     <EditText
@@ -183,6 +193,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     android:layout_marginTop="55dp"
                     android:textColorHint="@color/colorPrimary">
 
@@ -190,29 +202,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/saveProfile"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:autofillHints="Save Profile"
                             android:text="@string/profile_save"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="24sp" />
 
                         <Button
                             android:id="@+id/cancelEditProfile"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:autofillHints="Save Profile"
+                            android:layout_marginLeft="60dp"
                             android:text="@string/cancel"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="24sp"
-                            app:backgroundTint="#F44336" />
+                            app:backgroundTint="#F44336"
+                            android:layout_marginStart="60dp" />
 
                     </LinearLayout>
 

@@ -1,8 +1,7 @@
 package com.example.yajmana;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
-import com.example.yajmana.ui.login.LoginActivity;
 import com.google.gson.Gson;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +29,7 @@ public class EditProfileFragment extends Fragment {
     Button saveProfile, cancelEditProfile;
     String first_name, middle_name, last_name, profile_mobile, profile_email;
     ProgressBar progressBar;
+    View view;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -44,7 +40,7 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d("onCreateView", "Inside EditProfileFragment onCreateView()");
-        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         progressBar = view.findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);
         ImageView img = view.findViewById(R.id.profileImageView);
@@ -56,9 +52,7 @@ public class EditProfileFragment extends Fragment {
         lastName = view.findViewById(R.id.last_name);
         profileEmail = view.findViewById(R.id.profile_email);
         profileMobile = view.findViewById(R.id.profile_mobile);
-
         populateProfile();
-
         saveProfile = view.findViewById(R.id.saveProfile);
         cancelEditProfile = view.findViewById(R.id.cancelEditProfile);
         saveProfile.setOnClickListener(new View.OnClickListener() {
@@ -85,13 +79,13 @@ public class EditProfileFragment extends Fragment {
                     Log.e("onResponse", "Inside onResponse:" + new Gson().toJson(response.body()));
                     List<Profile> profile = response.body();
                     if(profile.get(0).getMobileNo().equals("")){
-                        Toast.makeText(getContext(),"Profile does not exist.",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getContext(),"Profile does not exist.",Toast.LENGTH_SHORT).show();
                     }else{
-                        firstName.setText(profile.get(0).getFirstName());
-                        middleName.setText(profile.get(0).getMiddleName());
-                        lastName.setText(profile.get(0).getLastName());
-                        profileMobile.setText(profile.get(0).getMobileNo());
-                        profileEmail.setText(profile.get(0).getEmail());
+                       firstName.setText(profile.get(0).getFirstName());
+                       middleName.setText(profile.get(0).getMiddleName());
+                       lastName.setText(profile.get(0).getLastName());
+                       profileMobile.setText(profile.get(0).getMobileNo());
+                       profileEmail.setText(profile.get(0).getEmail());
                     }
                     progressBar.setVisibility(View.GONE);
                 }
@@ -99,6 +93,24 @@ public class EditProfileFragment extends Fragment {
                 public void onFailure(Call<List<Profile>> call, Throwable t) {
                     Log.d("onFailure:", "Error:"+ t.toString());
                 }
+        });
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_BACK){
+                        getParentFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        ((NavigateActivity)getActivity()).setActionBarTitle(getString(R.string.profile_heading));
+                    }
+                }
+                return true;
+            }
         });
     }
 

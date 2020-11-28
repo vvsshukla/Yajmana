@@ -64,8 +64,8 @@ public class ProfileFragment extends Fragment {
         Glide.with(this)
                 .load(R.drawable.profile_image)
                 .into(img);
-        Button exitProfile = view.findViewById(R.id.exitProfile);
-        exitProfile.setOnClickListener(view1 -> ((NavigateActivity)getActivity()).loadFragment(new HomeFragment(),getActivity().getResources().getString(R.string.vanshawal_list)));
+//        Button exitProfile = view.findViewById(R.id.exitProfile);
+//        exitProfile.setOnClickListener(view1 -> ((NavigateActivity)getActivity()).loadFragment(new HomeFragment(),getActivity().getResources().getString(R.string.vanshawal_list)));
         loadProfile(view);
         return view;
     }

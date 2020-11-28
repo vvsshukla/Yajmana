@@ -1,5 +1,6 @@
 package com.example.yajmana.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.yajmana.Api;
 import com.example.yajmana.LoginResponse;
 import com.example.yajmana.NavigateActivity;
 import com.example.yajmana.R;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         final Button loginButton = findViewById(R.id.login);
+        this.setActionBarTitle(getString(R.string.login_head));
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,15 +71,22 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"The domain http://eastro.in is not permitted.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Network issue",Toast.LENGTH_SHORT).show();
                 Log.d("onFailure:", "Error:"+ t.toString());
-                Log.i("Failure Response", "Failure RCA ", t);
             }
         });
     }
 
-    public void logout(){
+    public void logout(Context ctx){
+        Intent intent = new Intent( ctx, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        startActivity(intent);
+        return;
+    }
 
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.yajmana;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import androidx.fragment.app.Fragment;
 
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -91,20 +96,30 @@ public class HomeFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.list_menu,menu);
         MenuItem item = menu.findItem(R.id.app_bar_search);
-        Log.d("app_bar_search", "Inside app_bar_search");
-        searchView = new SearchView(((NavigateActivity)getContext()).getSupportActionBar().getThemedContext());
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint(getString(R.string.vanshawal_no_hint));
-        item.setActionView(searchView);
+        if(item!=null){
+//          Log.d("app_bar_search", "Inside app_bar_search");
+            searchView = new SearchView(((NavigateActivity)getContext()).getSupportActionBar().getThemedContext());
+            searchView.setSubmitButtonEnabled(true);
+            searchView.setQueryHint(getString(R.string.vanshawal_no_hint));
+            searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+            item.setActionView(searchView);
+        }
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Log.d("onQueryTextSubmit", "Inside onQueryTextSubmit");
+                progressBar.setVisibility(View.VISIBLE);
+                try {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                    Log.d("keyboard","Dismissed");
+                } catch (Exception e){
+                    Log.e("exception", e.getMessage());
+                }
                 if(s.equals("")){
                     Toast.makeText(getContext(),"वंशावळ क्रमांक भरणे अत्यावश्यक.", Toast.LENGTH_SHORT).show();
                     return false;
-                }else if(!s.equals("") && s.length() != 6){
-                    Toast.makeText(getContext(),"वंशावळ क्रमांक अवैध.", Toast.LENGTH_SHORT).show();
+                } else if(!s.equals("") && ((s.length() < 3) || (s.length() > 6))){
+                    Toast.makeText(getContext(),"३ ते ६ अंकी वंशावळ क्र टाका.", Toast.LENGTH_SHORT).show();
                     return false;
                 } else {
                     searchByVanshawalCode(s);
@@ -117,7 +132,6 @@ public class HomeFragment extends Fragment {
                 Log.d("onQueryTextChange", "Inside onQueryTextChange");
                 return true;
             }
-
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
@@ -166,14 +180,17 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
                 List<Vanshawal> vanshawal = response.body();
                 if(response.body()!=null){
-                    Log.e("Vanshawal JSON",new Gson().toJson(response.body()));
-                    VanshawalAdapter vanshawalAdapter = new VanshawalAdapter(getContext(), vanshawal);
-                    emptyText.setVisibility(View.INVISIBLE);
-                    vanshawalAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(vanshawalAdapter); // set the Adapter to RecyclerView
-                    progressBar.setVisibility(View.GONE);
+                   Log.d("Vanshawal JSON",new Gson().toJson(response.body()));
+                   VanshawalAdapter vanshawalAdapter = new VanshawalAdapter(getContext(), vanshawal);
+                   emptyText.setVisibility(View.INVISIBLE);
+                   vanshawalAdapter.notifyDataSetChanged();
+                   recyclerView.setAdapter(vanshawalAdapter); // set the Adapter to RecyclerView
+                   progressBar.setVisibility(View.GONE);
                 }else{
-                    emptyText.setVisibility(View.VISIBLE);
+                   Log.d("Vanshawal JSON Empty",new Gson().toJson(response.body()));
+                   recyclerView.setVisibility(View.GONE);
+                   progressBar.setVisibility(View.GONE);
+                   emptyText.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -182,12 +199,50 @@ public class HomeFragment extends Fragment {
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });
+        getBack();
     }
 
     public void open_add_record(View view){
-        Log.d("loading","Scrolling fragment loading.");
         Fragment fragment = new ScrollingFragment();
         getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-        Log.d("loaded","Scrolling fragment loaded.");
+    }
+
+    public void getBack(){
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_BACK){
+                        progressBar.setVisibility(View.VISIBLE);
+                        if(recyclerView.getVisibility() != View.VISIBLE){
+                           recyclerView.setVisibility(View.VISIBLE);
+                        }
+                        if(emptyText.getVisibility() == View.VISIBLE){
+                            emptyText.setVisibility(View.GONE);
+                        }
+                        Call<List<Vanshawal>> call = Api.getClient().getVanshawal();// Get vanshawal data
+                        call.enqueue(new Callback<List<Vanshawal>>() {
+                            @Override
+                            public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
+                                List<Vanshawal> vanshawal = response.body();
+                                Log.e("Vanshawal JSON:",new Gson().toJson(response.body()));
+                                VanshawalAdapter vanshawalAdapter = new VanshawalAdapter(getContext(), vanshawal);// Call the constructor of vanshawalAdapter to send the reference and data to Adapter
+                                vanshawalAdapter.notifyDataSetChanged();
+                                recyclerView.setAdapter(vanshawalAdapter); //set the Adapter to RecyclerView
+                                progressBar.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Vanshawal>> call, Throwable t) {
+                                Log.d("onFailure:", "Error:"+ t.toString());
+                            }
+                        });
+                    }
+                }
+                return true;
+            }
+        });
     }
 }

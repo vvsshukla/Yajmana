@@ -1,6 +1,5 @@
 package com.example.yajmana;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.google.gson.Gson;
 
@@ -49,7 +49,7 @@ public class VanshawalAdapter extends RecyclerView.Adapter<VanshawalAdapter.Vans
         holder.mobile_no.setText(vanshawalList.get(position).getMobile());
         String gender = vanshawalList.get(position).getGender();
         //Female image
-        if(gender.equals(ctx.getResources().getString(R.string.female_string))){
+        if(gender!=null && gender.equals(ctx.getResources().getString(R.string.female_string))){
             holder.image.setBackgroundResource(R.drawable.person_female);
         }
 

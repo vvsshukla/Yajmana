@@ -24,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
+        android:layout_centerVertical="true" />
 
     <ScrollView
         android:id="@+id/scrolView_account"
@@ -38,22 +37,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="55dp"
                     android:orientation="vertical"
                     android:layout_below = "@+id/imageLayout">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"
+                            android:layout_height="200dp"
                             android:textColorHint="@color/colorPrimary"
-                            android:layout_marginTop="60dp">
+                            android:layout_marginTop="30dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -89,132 +86,132 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorPrimary"
-                        android:layout_marginTop="60dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginTop="60dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:id="@+id/profile_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:layout_weight="0.6"
-                                android:text="@string/profile_name"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/profile_name_value"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.4"
-                                android:gravity="center_horizontal"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                        </LinearLayout>
-
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorPrimary"
-                        android:layout_marginTop="60dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:id="@+id/mobile_no"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:layout_weight="0.6"
-                                android:text="@string/mobile_no_label"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/profile_mobile"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.4"
-                                android:gravity="center"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                        </LinearLayout>
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorPrimary"
-                        android:layout_marginTop="60dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:id="@+id/profile_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:layout_weight="0.6"
-                                android:text="@string/profile_email"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:id="@+id/profile_email_value"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.4"
-                                android:gravity="center"
-                                android:textColorHint="@color/colorPrimary"
-                                android:textSize="24sp" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="60dp"
-                        android:textColorHint="@color/colorPrimary">
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
-                        <Button
-                            android:id="@+id/exitProfile"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/profile_name"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:autofillHints="Save Profile"
-                            android:text="@string/profile_close"
+                            android:gravity="center"
+                            android:layout_weight="0.6"
+                            android:text="@string/profile_name"
                             android:textColorHint="@color/colorPrimary"
-                            android:textSize="24sp"
-                            app:backgroundTint="#F44336" />
+                            android:textSize="24sp" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:id="@+id/profile_name_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:gravity="center_horizontal"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginTop="60dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/mobile_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_weight="0.6"
+                            android:text="@string/mobile_no_label"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/profile_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/colorPrimary"
+                    android:layout_marginTop="60dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_weight="0.6"
+                            android:text="@string/profile_email"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/profile_email_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="60dp"
+                    android:textColorHint="@color/colorPrimary">
+
+<!--                        <Button-->
+<!--                            android:id="@+id/exitProfile"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:autofillHints="Save Profile"-->
+<!--                            android:text="@string/profile_close"-->
+<!--                            android:textColorHint="@color/colorPrimary"-->
+<!--                            android:textSize="24sp"-->
+<!--                            app:backgroundTint="#F44336" />-->
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

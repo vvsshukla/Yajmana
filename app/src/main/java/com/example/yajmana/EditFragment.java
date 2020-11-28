@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -36,13 +39,21 @@ public class EditFragment extends Fragment {
     EditText mobileNo, tipText, dynamic;
     Button btnUpdate, btnCancel;
     LinearLayout L1, L2, L3, L4, L5, L6, L7;
-    LinearLayout dynamicL1[], dynamicL2[], dynamicL3[], dynamicL4[], dynamicL5[], dynamicL6[], dynamicL7[];
+    LinearLayout[] dynamicL1;
+    LinearLayout[] dynamicL2;
+    LinearLayout[] dynamicL3;
+    LinearLayout[] dynamicL4;
+    LinearLayout[] dynamicL5;
+    LinearLayout[] dynamicL6;
+    LinearLayout[] dynamicL7;
     EditText t1, t2, t3, t4, t5, t6, t7;
     TextView add_more_real_uncle, add_more_cousin_uncle, add_more_real_uncle_son, add_more_cousin_uncle_son, add_more_real_brother, add_more_real_brother_son, add_more_son;
     EditText e1, e2, e3, e4, e5, e6, e7;
     Button B1, B2, B3, B4, B5, B6, B7;
     String late_fullname, vanshawalNo, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, tip, serverImagePath;
     String[] real_uncle_array, cousin_uncle_array, real_uncle_son_array, cousin_uncle_son_array, real_brother_array, real_brother_son_array, real_son_array;
+    View editView;
+    ProgressBar progressBar;
 
     public EditFragment(){
         real_uncle_count=0;
@@ -98,8 +109,11 @@ public class EditFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d("onCreateView", "Inside EditFragment onCreateView()");
         View view = inflater.inflate(R.layout.fragment_edit, container, false);
+        progressBar = view.findViewById(R.id.progressBar6);
+        this.editView = view;
         getUIReferences(view);
         populateEditVanshawal();
+        getBack();
         return view;
     }
 
@@ -236,7 +250,8 @@ public class EditFragment extends Fragment {
                 if(vanshawal.get(0).getMobile().equals("")){
                     Toast.makeText(getContext(),"Yajman does not exist.",Toast.LENGTH_SHORT).show();
                 }else{
-                   fullName.setText(vanshawal.get(0).getFirst_name() + " " + vanshawal.get(0).getMiddle_name() + " " + vanshawal.get(0).getLast_name());
+                   String str = vanshawal.get(0).getFirst_name() + " " + vanshawal.get(0).getMiddle_name() + " " + vanshawal.get(0).getLast_name();
+                   fullName.setText(str);
                    cityName.setText(vanshawal.get(0).getCity());
                    talukaName.setText(vanshawal.get(0).getTaluka());
                    districtName.setText(vanshawal.get(0).getDistrict());
@@ -269,14 +284,14 @@ public class EditFragment extends Fragment {
                             t1.setId(real_uncle_count_id);
                             t1.setText(real_uncle_array[i]);
                             t1.setTextSize(18);
-                            LinearLayout.LayoutParams t1Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t1Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);//LinearLayout.LayoutParams.WRAP_CONTENT
                             t1.setLayoutParams(t1Params);
                             p.addView(t1);
 
                             B1=new Button(getContext());
                             B1.setText("-");
                             B1.setTextSize(18);
-                            LinearLayout.LayoutParams b1Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.2f);
+                            LinearLayout.LayoutParams b1Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.3f);//LinearLayout.LayoutParams.WRAP_CONTENT
                             B1.setLayoutParams(b1Params);
                             B1.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -313,14 +328,14 @@ public class EditFragment extends Fragment {
                             t2.setId(cousin_uncle_count_id);
                             t2.setText(cousin_uncle_array[i]);
                             t2.setTextSize(18);
-                            LinearLayout.LayoutParams t1Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t1Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);//LinearLayout.LayoutParams.WRAP_CONTENT
                             t2.setLayoutParams(t1Params);
                             p.addView(t2);
 
                             B2=new Button(getContext());
                             B2.setText("-");
                             B2.setTextSize(18);
-                            LinearLayout.LayoutParams b2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b2Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);//LinearLayout.LayoutParams.WRAP_CONTENT
                             B2.setLayoutParams(b2Params);
                             B2.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -359,14 +374,14 @@ public class EditFragment extends Fragment {
                             t3.setText(real_uncle_son_array[i]);
                             t3.setId(real_uncle_son_count_id);
                             t3.setTextSize(18);
-                            LinearLayout.LayoutParams t3Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t3Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
                             t3.setLayoutParams(t3Params);
                             p.addView(t3);
 
                             B3=new Button(getContext());
                             B3.setText("-");
                             B3.setTextSize(18);
-                            LinearLayout.LayoutParams b3Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b3Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);
                             B3.setLayoutParams(b3Params);
                             B3.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -406,14 +421,14 @@ public class EditFragment extends Fragment {
                             t4.setText(cousin_uncle_son_array[i]);
                             t4.setTextSize(18);
                             t4.setId(cousin_uncle_son_count_id);
-                            LinearLayout.LayoutParams t4Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t4Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
                             t4.setLayoutParams(t4Params);
                             p.addView(t4);
 
                             B4=new Button(getContext());
                             B4.setText("-");
                             B4.setTextSize(18);
-                            LinearLayout.LayoutParams b4Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b4Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);
                             B4.setLayoutParams(b4Params);
                             B4.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -452,14 +467,14 @@ public class EditFragment extends Fragment {
                             t5.setText(real_brother_array[i]);
                             t5.setTextSize(18);
                             t5.setId(real_brother_count_id);
-                            LinearLayout.LayoutParams t5Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t5Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
                             t5.setLayoutParams(t5Params);
                             p.addView(t5);
 
                             B5=new Button(getContext());
                             B5.setText("-");
                             B5.setTextSize(18);
-                            LinearLayout.LayoutParams b5Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b5Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);
                             B5.setLayoutParams(b5Params);
                             B5.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -498,14 +513,14 @@ public class EditFragment extends Fragment {
                             t6.setText(real_brother_son_array[i]);
                             t6.setTextSize(18);
                             t6.setId(real_brother_son_count_id);
-                            LinearLayout.LayoutParams t6Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t6Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
                             t6.setLayoutParams(t6Params);
                             p.addView(t6);
 
                             B6=new Button(getContext());
                             B6.setText("-");
                             B6.setTextSize(18);
-                            LinearLayout.LayoutParams b6Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b6Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);
                             B6.setLayoutParams(b6Params);
                             B6.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -543,14 +558,14 @@ public class EditFragment extends Fragment {
                             t7.setText(real_son_array[i]);
                             t7.setTextSize(18);
                             t7.setId(son_count_id);
-                            LinearLayout.LayoutParams t7Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f);
+                            LinearLayout.LayoutParams t7Params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT, 0.7f);
                             t7.setLayoutParams(t7Params);
                             p.addView(t7);
 
                             B7=new Button(getContext());
                             B7.setText("-");
                             B7.setTextSize(18);
-                            LinearLayout.LayoutParams b7Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,0.2f);
+                            LinearLayout.LayoutParams b7Params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.3f);
                             B7.setLayoutParams(b7Params);
                             B7.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -570,6 +585,7 @@ public class EditFragment extends Fragment {
 
                    mobileNo.setText(vanshawal.get(0).getMobile());
                    tipText.setText(vanshawal.get(0).getTip());
+                   progressBar.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -1253,5 +1269,27 @@ public class EditFragment extends Fragment {
                 break;
         }
         parent.removeAllViews();
+    }
+
+    public void getBack(){
+        editView.setFocusableInTouchMode(true);
+        editView.requestFocus();
+        editView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_BACK){
+                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        getParentFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new HomeFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        ((NavigateActivity)getActivity()).setActionBarTitle(getString(R.string.vanshawal_heading));
+                    }
+                }
+                return true;
+            }
+        });
     }
 }
