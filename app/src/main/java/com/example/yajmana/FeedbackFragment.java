@@ -57,7 +57,7 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void loadRecyclerViewData() {
-        Call<List<Feedback>> call = Api.getClient().getFeedback();
+        Call<List<Feedback>> call = Api.getClient(this.getActivity()).getFeedback();
         call.enqueue(new Callback<List<Feedback>>() {
             @Override
             public void onResponse(Call<List<Feedback>> call, Response<List<Feedback>> response) {
@@ -71,7 +71,10 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Feedback>> call, Throwable t) {
                 Log.d("onFailure:", "Error:"+ t.toString());
-                Toast.makeText(getContext(),"Error:"+t.toString(), Toast.LENGTH_SHORT).show();
+                if(t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

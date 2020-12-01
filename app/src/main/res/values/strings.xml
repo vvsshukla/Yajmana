@@ -17,8 +17,10 @@
     <string name="title_activity_navigate">NavigateActivity</string>
     <string name="empty_text">कोणतीही रेकॉर्ड सापडली नाही.</string>
     <string name="title_home">यादी</string>
-    <string name="title_dashboard">Feedback</string>
-    <string name="title_notifications">Broadcast</string>
+    <string name="title_feedback">अभिप्राय</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_broadcast">ब्रॉडकास्ट</string>
     <string name="title_profile">Profile</string>
     <string name="splash_screen_text">Splash Screen</string>
     <string name="vanshawal_no_hint">वंशावळ क्रमांक टाका.</string>
@@ -139,7 +141,7 @@
     <string name="gender_hint">स्त्री / पुरुष</string>
     <string name="relative_details">नातेवाईकांविषयी माहिती</string>
     <string name="female_string">स्त्री</string>
-    <string name="logout">Logout</string>
+    <string name="logout">लॉग आऊट</string>
     <string name="feedback_content_validation">अभिप्राय संदेश आवश्यक.</string>
     <string name="death_anniverary_msg">वैध तारीख प्रविष्ट करा.</string>
     <string name="valid_mobile_no_msg">१० अंकी मोबाईल क्र. प्रविष्ट करा.</string>

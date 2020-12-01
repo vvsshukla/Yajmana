@@ -30,12 +30,13 @@
                 android:id="@+id/swa_vyaktichi_mahiti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:padding="10dp"
                 android:text="@string/swa_vyaktichi_mahiti"
                 android:textStyle="bold" />
-
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="10dp"-->
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="90dp"
@@ -59,25 +60,22 @@
                     android:id="@+id/full_name_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/full_name_label"
+                    android:text="@string/full_name_label"
                     android:layout_weight="1"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="20dp" />
-
+                    android:textSize="18sp"
+                    android:padding="10dp"
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:hint="@string/full_name_label"
                     android:importantForAutofill="no"
-                    android:layout_weight="1"
-                    android:layout_marginTop="10dp"
                     android:padding="10dp"
-                    android:background="@drawable/oval"/>
-
+                    android:textSize="16sp" />
+<!--android:background="@drawable/oval"-->
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +101,7 @@
                         android:importantForAutofill="no"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/city"
@@ -113,8 +111,7 @@
                         android:hint="@string/city_label"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:textSize="14sp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -135,7 +132,7 @@
                     android:importantForAutofill="no"
                     android:padding="10dp"
                     android:textStyle="bold"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/taluka"
@@ -145,8 +142,7 @@
                     android:hint="@string/taluka_lable"
                     android:importantForAutofill="no"
                     android:padding="10dp"
-                    android:textSize="14sp"
-                    android:background="@drawable/oval"/>
+                    android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -174,7 +170,7 @@
                         android:importantForAutofill="no"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/district"
@@ -184,7 +180,7 @@
                         android:importantForAutofill="no"
                         android:layout_below="@+id/district_lable"
                         android:padding="10dp"
-                        android:background="@drawable/oval" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -204,7 +200,7 @@
                         android:importantForAutofill="no"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/caste"
@@ -214,7 +210,7 @@
                         android:hint="@string/caste"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -243,7 +239,7 @@
                         android:importantForAutofill="no"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <!-- tithi  -->
                     <TextView
@@ -254,7 +250,7 @@
                         android:importantForAutofill="no"
                         android:layout_below="@+id/tithi_lable"
                         android:padding="10dp"
-                        android:background="@drawable/oval" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -274,7 +270,7 @@
                         android:importantForAutofill="no"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <!-- relation  -->
                     <TextView
@@ -285,7 +281,7 @@
                         android:importantForAutofill="no"
                         android:layout_below="@+id/relation_label"
                         android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -308,8 +304,7 @@
                     android:layout_weight="0.5"
                     android:padding="10dp"
                     android:textStyle="bold"
-                    android:textSize="14sp"
-                    />
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -324,11 +319,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:hint="@string/gender_hint"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    />
+                    android:padding="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -345,6 +338,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/relative_details"
                     android:textStyle="bold"
+                    android:padding="10dp"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -370,6 +364,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:text="@string/your_full_name_label"
+                        android:textSize="18sp"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
                         android:padding="10dp" />
@@ -385,10 +380,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:hint="@string/your_full_name_label"
                         android:importantForAutofill="no"
-                        android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:padding="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -404,7 +399,8 @@
                         android:text="@string/fathers_full_name"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
 <!--android:layout_marginTop="10dp"-->
                 <LinearLayout
@@ -419,8 +415,8 @@
                         android:hint="@string/fathers_full_name"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp"
+                        android:layout_weight="1"/>
                 </LinearLayout>
         <!--android:layout_marginTop="10dp"-->
                 <LinearLayout
@@ -437,7 +433,8 @@
                         android:text="@string/mothers_full_name"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -454,8 +451,8 @@
                     android:hint="@string/mothers_full_name"
                     android:importantForAutofill="no"
                     android:padding="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/oval"/>
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
 
         <!--android:layout_marginTop="10dp"-->
 
@@ -474,7 +471,8 @@
                         android:text="@string/grandpa_name"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -490,7 +488,7 @@
                         android:hint="@string/grandpa_name"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -507,7 +505,8 @@
                         android:text="@string/panjoba_name"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 <!--android:layout_marginTop="10dp"-->
@@ -525,7 +524,7 @@
                     android:hint="@string/panjoba_name"
                     android:importantForAutofill="no"
                     android:padding="10dp"
-                    android:background="@drawable/oval"/>
+                    android:textSize="16sp"/>
 
                 </LinearLayout>
 
@@ -544,7 +543,8 @@
                         android:text="@string/ni_panjoba_name"
                         android:importantForAutofill="no"
                         android:textStyle="bold"
-                        android:padding="10dp"/>
+                        android:padding="10dp"
+                        android:textSize="18sp"/>
 <!--android:layout_marginTop="10dp"-->
                 </LinearLayout>
 
@@ -562,7 +562,7 @@
                         android:hint="@string/ni_panjoba_name"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <!-- Real Uncle Name -->
@@ -582,10 +582,9 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp"/>
-                    <!--android:textSize="18sp"-->
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp"/>
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -613,9 +612,9 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp" />
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -640,7 +639,8 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp" />
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
 <!--android:layout_marginTop="20dp"-->
                 <LinearLayout
@@ -669,9 +669,9 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp" />
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -699,9 +699,10 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp" />
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -728,9 +729,10 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp" />
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp" />
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -757,9 +759,10 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="3dp"/>
+                        android:paddingBottom="3dp"
+                        android:textSize="18sp"/>
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -783,7 +786,8 @@
                         android:text="@string/mobile_no"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
                 </LinearLayout>
 <!--android:layout_marginTop="20dp"-->
                 <LinearLayout
@@ -799,7 +803,7 @@
                         android:ems="10"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:background="@drawable/oval"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -816,9 +820,10 @@
                         android:ems="10"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:text="@string/tip" />
+                        android:text="@string/tip"
+                        android:textSize="18sp" />
                 </LinearLayout>
-<!--android:layout_marginTop="20dp"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -832,8 +837,7 @@
                         android:ems="10"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:background="@drawable/oval"
-                        />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -850,10 +854,11 @@
                         android:importantForAutofill="no"
                         android:textStyle="bold"
                         android:padding="10dp"
+                        android:textSize="18sp"
                         android:layout_weight="1"/>
 
                 </LinearLayout>
-<!--android:layout_marginTop="10dp"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
@@ -870,7 +875,7 @@
                         android:padding="10dp"
                         android:contentDescription="@string/signature" />
                 </LinearLayout>
-        <!--    android:background="@drawable/border_signature"-->
+
             </LinearLayout>
 
         </RelativeLayout>

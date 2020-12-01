@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +23,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +37,8 @@ import androidx.annotation.Nullable;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,12 +72,16 @@ public class ScrollingFragment extends Fragment {
     LinearLayout[] parentL1, parentL2, parentL3, parentL4, parentL5, parentL6, parentL7;
     LinearLayout dynamicL1, dynamicL2, dynamicL3, dynamicL4, dynamicL5, dynamicL6, dynamicL7, parent;
     Button B1, B2, B3, B4, B5, B6, B7, saveSignature, clearSignature;
+    TextView t1, t2, t3, t4, t5, t6, t7;
     RadioGroup genderGroup;
     RadioButton btnGender;
     SignaturePad signaturePad;
     String albumName = "SignaturePad";
     Uri signatureImageUri;
     String late_fullname, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, genderString, tip, serverImagePath, realPath, signatureImagePath;
+    protected View scrollView;
+    private ProgressBar loading;
+    private Boolean signatureFlag;
 
     public ScrollingFragment() {
         real_uncle_count=0;
@@ -108,6 +118,8 @@ public class ScrollingFragment extends Fragment {
         son_count_id_start=170;
         son_count_id=170;
         son_button_id = 270;
+
+        signatureFlag = false;
     }
 
     @Nullable
@@ -116,7 +128,10 @@ public class ScrollingFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scrolling, container, false);
+        this.scrollView = view;
         setHasOptionsMenu(true);
+        loading = view.findViewById(R.id.scrollingProgressBar);
+        loading.setVisibility(View.GONE);
 
         Button btnAdd = view.findViewById(R.id.btnAdd);
         Button btnCancel = view.findViewById(R.id.btnCancel);
@@ -197,6 +212,7 @@ public class ScrollingFragment extends Fragment {
         });
         add_more_son.setOnClickListener(view13 -> add_more_son());
         initiateSignature(view);
+        getBack();
         return view;
     }
 
@@ -210,32 +226,33 @@ public class ScrollingFragment extends Fragment {
             LinearLayout.LayoutParams parentParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
             parentParams.topMargin = 5;
             p.setLayoutParams(parentParams);
-
             //Add EditText
             e1 = new EditText(getContext());
             e1.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("RealUncle", String.valueOf(real_uncle_count_id));
             e1.setId(real_uncle_count_id);
             e1.setHint(R.string.real_uncle_name);
             e1.setLayoutParams(params);
+            e1.setPadding(15,15,10,15);
             p.addView(e1);
 
             //Add Delete Button (-)
-            B1 = new Button(getContext());
-            B1.setId(real_uncle_button_id++);
-            B1.setText("-");
-            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B1.setLayoutParams(buttonParams);
-            p.addView(B1);
+            t1 = new TextView(getContext());
+            t1.setId(real_uncle_button_id++);
+            t1.setText("-");
+            t1.setTextSize(24);
+            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.05f);
+            t1.setLayoutParams(buttonParams);
+            t1.setPadding(0, t1.getPaddingTop(), t1.getPaddingRight(), t1.getPaddingBottom());
+            t1.setGravity(Gravity.CENTER);
+            t1.setTextColor(Color.RED);
+            p.addView(t1);
             dynamicL1.addView(p);
 
-            B1.setOnClickListener(new View.OnClickListener() {
+            t1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p,"real_uncle");
@@ -265,31 +282,37 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e2 = new EditText(getContext());
             e2.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("CousinUncle", String.valueOf(cousin_uncle_count_id));
             e2.setId(cousin_uncle_count_id++);
             e2.setHint(R.string.cousin_uncle_name);
             e2.setLayoutParams(params);
+            e2.setPadding(15,15,10,15);
             p.addView(e2);
 
             //Add Delete Button (-)
-            B2 = new Button(getContext());
-            B2.setId(cousin_uncle_button_id++);
-            B2.setText("-");
+            t2 = new TextView(getContext());
+            t2.setId(cousin_uncle_button_id++);
+            t2.setText("-");
+            t2.setTextSize(24);
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B2.setLayoutParams(buttonParams);
-            B2.setOnClickListener(new View.OnClickListener() {
+                    0.05f);
+            t2.setLayoutParams(buttonParams);
+            t2.setPadding(0, t2.getPaddingTop(), t2.getPaddingRight(), t2.getPaddingBottom());
+            t2.setGravity(Gravity.CENTER);
+            t2.setTextColor(Color.RED);
+            t2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "cousin_uncle");
                 }
             });
-            p.addView(B2);
+            p.addView(t2);
+
             if(this.cousin_uncle_count > 0){
                 View btnView = parentL2[this.cousin_uncle_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -315,31 +338,33 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e3 = new EditText(getContext());
             e3.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("RealUncleSon", String.valueOf(real_uncle_son_count_id));
             e3.setId(real_uncle_son_count_id++);
             e3.setHint(R.string.real_uncle_son_name);
             e3.setLayoutParams(params);
+            e3.setPadding(15,15,10,15);
             p.addView(e3);
 
             //Add Delete Button (-)
-            B3 = new Button(getContext());
-            B3.setId(real_uncle_son_button_id++);
-            B3.setText("-");
-            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B3.setLayoutParams(buttonParams);
-            B3.setOnClickListener(new View.OnClickListener() {
+            t3 = new TextView(getContext());
+            t3.setId(real_uncle_son_button_id++);
+            t3.setText("-");
+            t3.setTextSize(24);
+            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,0.05f);
+            t3.setLayoutParams(buttonParams);
+            t3.setPadding(0, t3.getPaddingTop(), t3.getPaddingRight(), t3.getPaddingBottom());
+            t3.setGravity(Gravity.CENTER);
+            t3.setTextColor(Color.RED);
+            t3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "real_uncle_son");
                 }
             });
-            p.addView(B3);
+            p.addView(t3);
             if(this.real_uncle_son_count > 0){
                 View btnView = parentL3[this.real_uncle_son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -364,32 +389,37 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e4 = new EditText(getContext());
             e4.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("RealUncle", String.valueOf(cousin_uncle_son_count_id));
             e4.setId(cousin_uncle_son_count_id++);
             e4.setHint(R.string.cousin_uncle_son_name);
             e4.setLayoutParams(params);
+            e4.setPadding(15,15,10,15);
             p.addView(e4);
 
             //Add Delete Button (-)
-            B4 = new Button(getContext());
-            B4.setId(cousin_uncle_button_id++);
-            B4.setText("-");
+            t4 = new TextView(getContext());
+            t4.setId(cousin_uncle_button_id++);
+            t4.setText("-");
+            t4.setTextSize(24);
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B4.setLayoutParams(buttonParams);
-            p.addView(B4);
+                    0.05f);
+            t4.setLayoutParams(buttonParams);
+            t4.setPadding(0, t4.getPaddingTop(), t4.getPaddingRight(), t4.getPaddingBottom());
+            t4.setGravity(Gravity.CENTER);
+            t4.setTextColor(Color.RED);
+            p.addView(t4);
             if(this.cousin_uncle_son_count > 0){
                 View btnView = parentL4[this.cousin_uncle_son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
             }
             dynamicL4.addView(p);
             this.cousin_uncle_son_count++;
-            B4.setOnClickListener(new View.OnClickListener() {
+            t4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "cousin_uncle_son");
@@ -413,31 +443,36 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e5 = new EditText(getContext());
             e5.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("CousinUncle", String.valueOf(real_brother_count_id));
             e5.setId(real_brother_count_id++);
             e5.setHint(R.string.real_brother_name);
+            e5.setPadding(15,15,10,15);
             e5.setLayoutParams(params);
             p.addView(e5);
 
             //Add Delete Button (-)
-            B5 = new Button(getContext());
-            B5.setId(real_brother_button_id++);
-            B5.setText("-");
+            t5 = new TextView(getContext());
+            t5.setId(real_brother_button_id++);
+            t5.setText("-");
+            t5.setTextSize(24);
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B5.setLayoutParams(buttonParams);
-            B5.setOnClickListener(new View.OnClickListener() {
+                    0.05f);
+            t5.setLayoutParams(buttonParams);
+            t5.setPadding(0, t5.getPaddingTop(),t5.getPaddingRight(),t5.getPaddingBottom());
+            t5.setGravity(Gravity.CENTER);
+            t5.setTextColor(Color.RED);
+            t5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "real_brother");
                 }
             });
-            p.addView(B5);
+            p.addView(t5);
             if(this.real_brother_count > 0){
                 Log.d("real_brother_count", String.valueOf(real_brother_count));
                 View btnView = parentL5[this.real_brother_count-1].getChildAt(1);
@@ -463,36 +498,40 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e6 = new EditText(getContext());
             e6.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("RealUncleSon", String.valueOf(real_brother_son_count_id));
             e6.setId(real_brother_son_count_id++);
             e6.setHint(R.string.real_brother_son_name);
             e6.setLayoutParams(params);
+            e6.setPadding(15,15,10,15);
             p.addView(e6);
 
             //Add Delete Button (-)
-            B6 = new Button(getContext());
-            B6.setId(real_brother_son_button_id++);
-            B6.setText("-");
+            t6 = new TextView(getContext());
+            t6.setId(real_brother_son_button_id++);
+            t6.setText("-");
+            t6.setTextSize(24);
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B6.setLayoutParams(buttonParams);
-            B6.setOnClickListener(new View.OnClickListener() {
+                    0.05f);
+            t6.setLayoutParams(buttonParams);
+            t6.setPadding(0, t6.getPaddingTop(),t6.getPaddingRight(),t6.getPaddingBottom());
+            t6.setGravity(Gravity.CENTER);
+            t6.setTextColor(Color.RED);
+            t6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "real_brother_son");
                 }
             });
-            p.addView(B6);
+            p.addView(t6);
             if(this.real_brother_son_count > 0){
                 View btnView = parentL6[this.real_brother_son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
             }
-
             dynamicL6.addView(p);
             this.real_brother_son_count++;
         } else {
@@ -513,31 +552,36 @@ public class ScrollingFragment extends Fragment {
             //Add EditText
             e7 = new EditText(getContext());
             e7.setBackgroundResource(R.drawable.oval);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.8f);
+                    0.95f);
             Log.d("RealUncleSon", String.valueOf(son_count_id));
             e7.setId(son_count_id++);
             e7.setHint(R.string.son_name);
             e7.setLayoutParams(params);
+            e7.setPadding(15,15,10,15);
             p.addView(e7);
 
             //Add Delete Button (-)
-            B7 = new Button(getContext());
-            B7.setId(son_button_id++);
-            B7.setText("-");
+            t7 = new TextView(getContext());
+            t7.setId(son_button_id++);
+            t7.setText("-");
+            t7.setTextSize(24);
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0.2f);
-            B7.setLayoutParams(buttonParams);
-            B7.setOnClickListener(new View.OnClickListener() {
+                    0.05f);
+            t7.setLayoutParams(buttonParams);
+            t7.setPadding(0, t7.getPaddingTop(),t7.getPaddingRight(),t7.getPaddingBottom());
+            t7.setGravity(Gravity.CENTER);
+            t7.setTextColor(Color.RED);
+            t7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     delete_dynamic_layout(p, "son");
                 }
             });
-            p.addView(B7);
+            p.addView(t7);
             if(this.son_count > 0){
                 View btnView = parentL7[this.son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -661,6 +705,7 @@ public class ScrollingFragment extends Fragment {
         int selectedId = genderGroup.getCheckedRadioButtonId();
         btnGender = view.findViewById(selectedId);
         tipText = view.findViewById(R.id.tip);
+        Log.d("validation_status", "Value:"+ !yourFullName.getText().toString().equals("") + ":" + genderGroup.getCheckedRadioButtonId() + ":"+ !mobileNo.getText().toString().equals(""));
         Log.d("mobile no", "Value:"+mobileNo.getText().toString());
         if(mobileNo.getText().toString().equals("") && mobileNo.getText().length() != 10) {
             Log.d("Validation Mobile", "Failure");
@@ -675,62 +720,46 @@ public class ScrollingFragment extends Fragment {
             return true;
         } else {
             Log.d("Validation","Failure");
-            Toast.makeText(getActivity(), "लिंग, पूर्ण नाव, मोबाईल क्र. भरणे आवश्यक.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "लिंग, तुमचे पूर्ण नाव आणि मोबाईल क्र. आवश्यक.", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
 
     private void initiateSignature(View view) {
         signaturePad = view.findViewById(R.id.signature_pad);
-        //saveSignature = view.findViewById(R.id.saveSignature);
         clearSignature = view.findViewById(R.id.clearSignature);
         verifyStoragePermissions(getActivity());
         signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
                 Log.d("startSigning", "OnStartSigning");
-                //Toast.makeText(getContext(), "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSigned() {
-                //saveSignature.setEnabled(true);
                 clearSignature.setEnabled(true);
+                signatureFlag = true;
             }
 
             @Override
             public void onClear() {
-                //saveSignature.setEnabled(false);
                 clearSignature.setEnabled(false);
+                if(signatureFlag){
+                    signatureFlag = false;
+                }
             }
-
         });
         clearSignature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signaturePad.clear();
             }
-
         });
-        /*
-            saveSignature.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
-                    realPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
-                    if (addJpgSignatureToGallery(signatureBitmap)) {
-                        Log.d("success", "Jpg signature saved into the Gallery.");
-                        Toast.makeText(getContext(), "Jpg Signature saved into the Gallery.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("failure", "Unable to store the signature.");
-                        Toast.makeText(getContext(), "Unable to store the signature.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        */
     }
 
     public void add_vanshawal_record(){
+        ((NavigateActivity)getActivity()).disableUserInteraction();
+        loading.setVisibility(View.VISIBLE);
         Log.d("add_vanshawal_record","Inside add_vanshawal_record");
         late_fullname = fullName.getText().toString().trim();
         city = cityName.getText().toString().trim();
@@ -749,7 +778,6 @@ public class ScrollingFragment extends Fragment {
         real_uncle = real_uncle_name.getText().toString().trim();
         if(real_uncle_count!=0){
            for (int cnt=0; cnt < real_uncle_count; cnt++){
-                //if(parentL1[this.real_uncle_count_id_start + cnt]!=null){
                if(parentL1[cnt]!=null){
                     dynamic = getView().findViewById(real_uncle_count_id_start + cnt);
                     Log.d("RealUncleDynamic", dynamic.getText().toString().trim());
@@ -763,7 +791,6 @@ public class ScrollingFragment extends Fragment {
         if(cousin_uncle_count!=0) {
             for (int cnt = 0; cnt < cousin_uncle_count; cnt++) {
                 if(parentL2[cnt]!=null){
-                //if (parentL2[this.cousin_uncle_count_id_start + cnt] != null) {
                     dynamic = getView().findViewById(cousin_uncle_count_id_start + cnt);
                     Log.d("CousinUncleDynamic", dynamic.getText().toString().trim());
                     cousin_uncle = cousin_uncle + "," + dynamic.getText().toString().trim();
@@ -835,14 +862,14 @@ public class ScrollingFragment extends Fragment {
         tip = tipText.getText().toString().trim();
         genderString = btnGender.getText().toString().trim();
 
-        Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
-        realPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
-        if (addJpgSignatureToGallery(signatureBitmap)) {
-            Log.d("success", "Jpg signature saved into the Gallery.");
-            Toast.makeText(getContext(), "Jpg Signature saved into the Gallery.", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d("failure", "Unable to store the signature.");
-            Toast.makeText(getContext(), "Unable to store the signature.", Toast.LENGTH_SHORT).show();
+        if(signatureFlag){
+            Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
+            realPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath().concat("/"+albumName);
+            if (addJpgSignatureToGallery(signatureBitmap)) {
+                Log.d("success", "Jpg signature saved into the Gallery.");
+            } else {
+                Log.d("failure", "Unable to store the signature.");
+            }
         }
         uploadFile(signatureImagePath, "Signature Image");
     }
@@ -850,37 +877,44 @@ public class ScrollingFragment extends Fragment {
     private void uploadFile(String selectedImageUrl, String desc ){
         //creating a file
         Log.d("uploadFile", "Inside uploadFile()");
-        File file = new File(selectedImageUrl);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
-        Call<SignUpResponse> call = Api.getClient().uploadSignature(fileToUpload);
-        call.enqueue(new Callback<SignUpResponse>() {
-            @Override
-            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                if (response!=null && response.body().getResponseCode()==1) {
-                    serverImagePath = response.body().getMessage();
-                    Toast.makeText(getContext(), "File Uploaded:"+serverImagePath, Toast.LENGTH_LONG).show();
-                    updateYajamana();
-                } else {
-                    Toast.makeText(getContext(), "Unable to upload signature.", Toast.LENGTH_LONG).show();
+        //Log.d("selectedImageUrl", selectedImageUrl);
+        if(selectedImageUrl!=null && !selectedImageUrl.equals("")){
+            File file = new File(selectedImageUrl);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+            MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+            ((NavigateActivity)getActivity()).disableUserInteraction();
+            Call<SignUpResponse> call = Api.getClient(this.getActivity()).uploadSignature(fileToUpload);
+            call.enqueue(new Callback<SignUpResponse>() {
+                @Override
+                public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                    if (response!=null && response.body().getResponseCode()==1) {
+                        serverImagePath = response.body().getMessage();
+                        Toast.makeText(getContext(), "File Uploaded:"+serverImagePath, Toast.LENGTH_LONG).show();
+                        updateYajamana();
+                    } else {
+                        Toast.makeText(getContext(), "Unable to upload signature.", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                Log.d("onFailure", t.getMessage());
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                    Log.d("onFailure", t.getMessage());
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            updateYajamana();
+        }
     }
 
     private void updateYajamana(){
-        Call<SignUpResponse> call = Api.getClient().createVanshawal(late_fullname, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, genderString, tip, serverImagePath);
+        Call<SignUpResponse> call = Api.getClient(this.getActivity()).createVanshawal(late_fullname, city, taluka, district, caste, death_anniversary, relation, yajman, father, mother, grandpa, panjoba, nipanjoba, real_uncle, cousin_uncle, real_uncle_son, cousin_uncle_son, real_brother, real_brother_son, son, mobileno, genderString, tip, serverImagePath);
         call.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 Log.d("UpdateResponse", "Status: " + response.body().getResponseCode() + ", Message: "+ response.body().getMessage());
                 if( response.body().getResponseCode() == 1 ) {
+                    loading.setVisibility(View.GONE);
                     Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा.",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getActivity().getApplicationContext(),NavigateActivity.class));
                     getActivity().finish();
@@ -889,12 +923,14 @@ public class ScrollingFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "सदर यजमान यादीत जमा होण्यास असफल.",Toast.LENGTH_SHORT).show();
                 }
+                ((NavigateActivity)getActivity()).enableUserInteraction();
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 Toast.makeText(getActivity().getApplicationContext(), "Error:"+ t.toString(),Toast.LENGTH_SHORT).show();
                 Log.d("onFailure:", "Error:"+ t.toString());
+                ((NavigateActivity)getActivity()).enableUserInteraction();
             }
         });
     }
@@ -973,5 +1009,27 @@ public class ScrollingFragment extends Fragment {
         if (permission!= PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
+    }
+
+    public void getBack(){
+        scrollView.setFocusableInTouchMode(true);
+        scrollView.requestFocus();
+        scrollView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_BACK){
+                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        getParentFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new HomeFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        ((NavigateActivity)getActivity()).setActionBarTitle(getString(R.string.vanshawal_heading));
+                    }
+                }
+                return true;
+            }
+        });
     }
 }

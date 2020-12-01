@@ -9,6 +9,12 @@
     android:layout_marginTop="100dp"
     tools:context=".AddFeedbackFragment">
 
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
     <!-- TODO: Update blank fragment layout -->
 
         <EditText
@@ -41,7 +47,7 @@
             android:id="@+id/content_text"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="360dp"
             android:layout_below="@+id/vanshawal_no"
             android:inputType="textMultiLine"
             android:maxLength="1000"
@@ -61,7 +67,7 @@
             android:layout_below="@+id/content_text"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="60dp">
 
             <Button
                 android:id="@+id/feedback_save"

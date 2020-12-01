@@ -9,16 +9,16 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/feedback"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_feedback" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/mail__1_"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_broadcast" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/user"
-        android:title="@string/title_profile" />
+        android:title="@string/profile_heading" />
     <item
         android:id="@+id/navigation_logout"
         android:icon="@drawable/logout24"

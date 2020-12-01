@@ -79,6 +79,7 @@ public class VanshawalAdapter extends RecyclerView.Adapter<VanshawalAdapter.Vans
         fragment = new EditFragment(vanshawal_no);
         NavigateActivity navigateActivity = (NavigateActivity) this.ctx;
         navigateActivity.loadFragment(fragment, navigateActivity.getString(R.string.yajmana_detail_info));
+        Log.d("Edit fragment","Edit fragment loaded.");
     }
 
     private void open_detail_fragment(String vanshawalNo) {
@@ -92,6 +93,7 @@ public class VanshawalAdapter extends RecyclerView.Adapter<VanshawalAdapter.Vans
         fragment = new AddFeedbackFragment(vanshawalNo, yajman);
         NavigateActivity navigateActivity = ( NavigateActivity ) this.ctx;
         navigateActivity.loadFragment(fragment, navigateActivity.getString(R.string.new_feedback));
+        Log.d("Feedback fragment","Feedback fragment loaded. "+ vanshawalNo + " " + yajman);
     }
 
     @Override

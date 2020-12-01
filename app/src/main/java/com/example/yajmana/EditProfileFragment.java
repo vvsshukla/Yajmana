@@ -72,7 +72,7 @@ public class EditProfileFragment extends Fragment {
 
     private void populateProfile(){
         Log.d("populateProfile:", "Inside populateProfile()");
-        Call<List<Profile>> call = Api.getClient().getProfile();
+        Call<List<Profile>> call = Api.getClient(this.getActivity()).getProfile();
         call.enqueue(new Callback<List<Profile>>() {
                 @Override
                 public void onResponse(Call<List<Profile>> call, Response<List<Profile>> response) {
@@ -91,6 +91,10 @@ public class EditProfileFragment extends Fragment {
                 }
                 @Override
                 public void onFailure(Call<List<Profile>> call, Throwable t) {
+                    if(t instanceof NoConnectivityException) {
+                        // show No Connectivity message to user or do whatever you want.
+                        Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
                     Log.d("onFailure:", "Error:"+ t.toString());
                 }
         });
@@ -128,26 +132,63 @@ public class EditProfileFragment extends Fragment {
         Log.d("profile_email", profile_email);
         Log.d("profile_mobile", profile_mobile);
 
-        Call<LoginResponse> call = Api.getClient().updateProfile(first_name, middle_name, last_name, profile_mobile, profile_email);
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.d("updateProfile Response", "Status: " + response.body().getSuccess() + ", Message: "+ response.body().getMessage());
-                if (response.body().getSuccess().equals("1")){
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.edit_profile_success_message),Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.edit_profile_failure_message), Toast.LENGTH_SHORT).show();
+        if(first_name.trim().isEmpty() || middle_name.trim().isEmpty() || last_name.trim().isEmpty() || profile_email.trim().isEmpty() || profile_mobile.trim().isEmpty()){
+           Toast.makeText(getContext(), "सर्व माहिती भरणे आवश्यक.", Toast.LENGTH_SHORT).show();
+        } else {
+            ((NavigateActivity)getActivity()).disableUserInteraction();
+            progressBar.setVisibility(View.VISIBLE);
+            Call<LoginResponse> call = Api.getClient(this.getActivity()).updateProfile(first_name, middle_name, last_name, profile_mobile, profile_email);
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    progressBar.setVisibility(View.GONE);
+                    Log.d("updateProfile Response", "Status: " + response.body().getSuccess() + ", Message: "+ response.body().getMessage());
+                    if (response.body().getSuccess().equals("1")){
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.edit_profile_success_message),Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.edit_profile_failure_message), Toast.LENGTH_SHORT).show();
+                    }
+                    ((NavigateActivity)getActivity()).enableUserInteraction();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.d("onFailure:", "Error:"+ t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    if(t instanceof NoConnectivityException) {
+                        // show No Connectivity message to user or do whatever you want.
+                        Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                    Log.d("onFailure:", "Error:"+ t.toString());
+                    ((NavigateActivity)getActivity()).enableUserInteraction();
+                }
+            });
+        }
+        getBack();
     }
 
     private void cancel_edit(){
         getParentFragmentManager().popBackStack();
     }
+
+    public void getBack(){
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_BACK){
+                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        getParentFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        ((NavigateActivity)getActivity()).setActionBarTitle(getString(R.string.profile_heading));
+                    }
+                }
+                return true;
+            }
+        });
+    }
+
 }

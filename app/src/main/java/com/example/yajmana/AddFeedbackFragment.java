@@ -1,4 +1,5 @@
 package com.example.yajmana;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,8 +9,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import retrofit2.Call;
@@ -26,6 +29,7 @@ public class AddFeedbackFragment extends Fragment {
     private String vanshawalCode;
     private String fullName;
     protected View fView;
+    private ProgressBar loader;
     public AddFeedbackFragment() {}
     public AddFeedbackFragment( String vanshawalCode, String fullName ) {
         this.vanshawalCode = vanshawalCode;
@@ -43,6 +47,7 @@ public class AddFeedbackFragment extends Fragment {
         fullNameText = view.findViewById(R.id.full_name);
         vanshawalCodeText = view.findViewById(R.id.vanshawal_no);
         contentText = view.findViewById(R.id.content_text);
+        loader = view.findViewById(R.id.loader);
         if((this.vanshawalCode!=null && !this.vanshawalCode.trim().isEmpty()) && (this.fullName!=null && !this.fullName.trim().isEmpty())){
             vanshawalCodeText.setText(this.vanshawalCode);
             fullNameText.setText(this.fullName);
@@ -57,9 +62,7 @@ public class AddFeedbackFragment extends Fragment {
         fullName = fullNameText.getText().toString();
         vanshawalCode = vanshawalCodeText.getText().toString();
         feedbackContent = contentText.getText().toString();
-        Log.d("fullName",fullName);
-        Log.d("vanshwalCode",vanshawalCode);
-        Log.d("content",feedbackContent);
+        Log.d("validation_feednack", fullName+":"+vanshawalCode+":"+feedbackContent);
         if(fullName==null || fullName.trim().isEmpty()){
            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.vanshawal_no_validation), Toast.LENGTH_SHORT).show();
            return false;
@@ -71,12 +74,22 @@ public class AddFeedbackFragment extends Fragment {
     }
 
     private void saveFeedback() {
+        try {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+            Log.d("keyboard","Dismissed");
+        }catch (Exception e){
+            Log.e("Exception:", e.getMessage());
+        }
         boolean isInputValid = isValidInput();
         if(isInputValid){
-            Call<LoginResponse> call = Api.getClient().addFeedback(fullName, vanshawalCode, feedbackContent);
+            ((NavigateActivity)getActivity()).disableUserInteraction();
+            Call<LoginResponse> call = Api.getClient(this.getActivity()).addFeedback(fullName, vanshawalCode, feedbackContent);
+            loader.setVisibility(View.VISIBLE);
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    loader.setVisibility(View.GONE);
                     Log.d("Response", "Status: " + response.body().getSuccess() + ", Message: "+ response.body().getMessage());
                     if (response.body().getSuccess().equals("1")){
                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -86,13 +99,22 @@ public class AddFeedbackFragment extends Fragment {
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                    ((NavigateActivity)getActivity()).enableUserInteraction();
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    loader.setVisibility(View.GONE);
+                    if(t instanceof NoConnectivityException) {
+                        // show No Connectivity message to user or do whatever you want.
+                        Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
                     Log.d("onFailure:", "Error:"+ t.toString());
+                    ((NavigateActivity)getActivity()).enableUserInteraction();
                 }
             });
+        } else {
+            ((NavigateActivity)getActivity()).enableUserInteraction();
         }
     }
 
@@ -119,12 +141,14 @@ public class AddFeedbackFragment extends Fragment {
         fView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction()==KeyEvent.ACTION_DOWN){
+                  Log.d("onKey","getBack");
+//                if(event.getAction()==KeyEvent.ACTION_DOWN){
                     if(keyCode == KeyEvent.KEYCODE_BACK){
+                        Log.d("KEYCODE_BACK","KEYCODE_BACK");
                         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                         ((NavigateActivity)getActivity()).loadFragment(fragment, title);
                     }
-                }
+//                }
                 return true;
             }
         });

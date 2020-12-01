@@ -99,7 +99,7 @@ public class DetailFragment extends Fragment {
 
     private void loadDetails() {
         Log.d("loadDetails", "Inside loadDetails()");
-        Call<List<Vanshawal>> call = Api.getClient().getVanshawalDetails(this.vanshawalNo);
+        Call<List<Vanshawal>> call = Api.getClient(this.getActivity()).getVanshawalDetails(this.vanshawalNo);
         call.enqueue(new Callback<List<Vanshawal>>() {
             @Override
             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
@@ -151,8 +151,8 @@ public class DetailFragment extends Fragment {
 //                           s.setSpan(new BulletSpan(15), 0, real_uncle_array[i].length(), 0);
                            t1[i] = new TextView(getActivity());
                            t1[i].setText(real_uncle_array[i]);
-                           t1[i].setTextSize(14);
-                           t1[i].setBackground(image);
+                           t1[i].setTextSize(16);
+//                           t1[i].setBackground(image);
                            t1[i].setLayoutParams(paramsInternal);
                            t1[i].setGravity(Gravity.CENTER_VERTICAL);
                            t1[i].setPadding(15,10,10,10);
@@ -182,12 +182,12 @@ public class DetailFragment extends Fragment {
                            LinearLayout p = new LinearLayout(getContext());
                            p.setOrientation(LinearLayout.HORIZONTAL);
                            p.setWeightSum(1);
-                           SpannableString s = new SpannableString(cousin_uncle_array[i]);
-                           s.setSpan(new BulletSpan(15), 0, cousin_uncle_array[i].length(), 0);
+//                           SpannableString s = new SpannableString(cousin_uncle_array[i]);
+//                           s.setSpan(new BulletSpan(15), 0, cousin_uncle_array[i].length(), 0);
                            t2[i] = new TextView(getActivity());
-                           t2[i].setText(s);
-                           t2[i].setTextSize(14);
-                           t2[i].setBackground(image);
+                           t2[i].setText(cousin_uncle_array[i]);
+                           t2[i].setTextSize(16);
+//                           t2[i].setBackground(image);
                            t2[i].setLayoutParams(paramsInternal);
                            t2[i].setGravity(Gravity.CENTER_VERTICAL);
                            t2[i].setPadding(15,10,10,10);
@@ -221,8 +221,8 @@ public class DetailFragment extends Fragment {
 //                           s.setSpan(new BulletSpan(15), 0, real_uncle_son_array[i].length(), 0);
                            t3[i] = new TextView(getActivity());
                            t3[i].setText(real_uncle_son_array[i]);
-                           t3[i].setTextSize(14);
-                           t3[i].setBackground(image);
+                           t3[i].setTextSize(16);
+//                           t3[i].setBackground(image);
                            t3[i].setLayoutParams(paramsInternal);
                            t3[i].setGravity(Gravity.CENTER_VERTICAL);
                            t3[i].setPadding(15,10,10,10);
@@ -256,8 +256,8 @@ public class DetailFragment extends Fragment {
 //                           s.setSpan(new BulletSpan(15), 0, cousin_uncle_son_array[i].length(), 0);
                            t4[i] = new TextView(getActivity());
                            t4[i].setText(cousin_uncle_son_array[i]);
-                           t4[i].setTextSize(14);
-                           t4[i].setBackground(image);
+                           t4[i].setTextSize(16);
+//                           t4[i].setBackground(image);
                            t4[i].setLayoutParams(paramsInternal);
                            t4[i].setGravity(Gravity.CENTER_VERTICAL);
                            t4[i].setPadding(15,10,10,10);
@@ -291,8 +291,8 @@ public class DetailFragment extends Fragment {
 //                            s.setSpan(new BulletSpan(15), 0, real_brother_array[i].length(), 0);
                             t5[i] = new TextView(getActivity());
                             t5[i].setText(real_brother_array[i]);
-                            t5[i].setTextSize(14);
-                            t5[i].setBackground(image);
+                            t5[i].setTextSize(16);
+//                            t5[i].setBackground(image);
                             t5[i].setLayoutParams(paramsInternal);
                             t5[i].setGravity(Gravity.CENTER_VERTICAL);
                             t5[i].setPadding(15,10,10,10);
@@ -326,8 +326,8 @@ public class DetailFragment extends Fragment {
 //                           s.setSpan(new BulletSpan(15), 0, real_brother_son_array[i].length(), 0);
                            t6[i] = new TextView(getActivity());
                            t6[i].setText(real_brother_son_array[i]);
-                           t6[i].setTextSize(14);
-                           t6[i].setBackground(image);
+                           t6[i].setTextSize(16);
+//                           t6[i].setBackground(image);
                            t6[i].setLayoutParams(paramsInternal);
                            t6[i].setGravity(Gravity.CENTER_VERTICAL);
                            t6[i].setPadding(15,10,10,10);
@@ -361,8 +361,8 @@ public class DetailFragment extends Fragment {
 //                           s.setSpan(new BulletSpan(15), 0, real_son_array[i].length(), 0);
                            t7[i] = new TextView(getActivity());
                            t7[i].setText(real_son_array[i]);
-                           t7[i].setTextSize(14);
-                           t7[i].setBackground(image);
+                           t7[i].setTextSize(16);
+//                           t7[i].setBackground(image);
                            t7[i].setLayoutParams(paramsInternal);
                            t7[i].setGravity(Gravity.CENTER_VERTICAL);
                            t7[i].setPadding(15,10,10,10);
@@ -409,6 +409,10 @@ public class DetailFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<Vanshawal>> call, Throwable t) {
+                if(t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });

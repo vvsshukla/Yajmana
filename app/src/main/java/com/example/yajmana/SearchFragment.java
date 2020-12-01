@@ -67,7 +67,6 @@ public class SearchFragment extends Fragment {
         }catch (Exception e){
             Log.e("Exception", e.getMessage());
         }
-        progressBar.setVisibility(View.VISIBLE);
         EditText firstName = view.findViewById(R.id.first_name);
         EditText middleName = view.findViewById(R.id.middle_name);
         EditText lastName = view.findViewById(R.id.last_name);
@@ -125,22 +124,24 @@ public class SearchFragment extends Fragment {
 
     public void search_vanshawal(){
         Log.d("search_vanshawal", "Inside search_vanshawal()");
-        Call<List<Vanshawal>> call = Api.getClient().searchVanshawal( late_firstname, late_middlename, late_lastname, caste, city, taluka, district, death_anniversary, mobile);
+        progressBar.setVisibility(View.VISIBLE);
+        Call<List<Vanshawal>> call = Api.getClient(this.getActivity()).searchVanshawal( late_firstname, late_middlename, late_lastname, caste, city, taluka, district, death_anniversary, mobile);
         call.enqueue(new Callback<List<Vanshawal>>() {
             @Override
             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
                 Log.e("JSON:",new Gson().toJson(response.body()));
                 if(response.body()!=null){
+                   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                   recyclerView.setLayoutManager(linearLayoutManager);
                    List<Vanshawal> vanshawal = response.body();
                    VanshawalAdapter vanshawalAdapter = new VanshawalAdapter(getContext(), vanshawal);
+                   vanshawalAdapter.notifyDataSetChanged();
+                   recyclerView.setAdapter(vanshawalAdapter); //Set the Adapter to RecyclerView
                    String title=getActivity().getResources().getString(R.string.search_result_heading);
                    ((NavigateActivity)getActivity()).setActionBarTitle(title);
                    search_params.setVisibility(View.GONE);
                    progressBar.setVisibility(View.GONE);
                    recyclerView.setVisibility(View.VISIBLE);
-                   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                   recyclerView.setLayoutManager(linearLayoutManager);
-                   recyclerView.setAdapter(vanshawalAdapter); //Set the Adapter to RecyclerView
                    emptyText.setVisibility(View.GONE);
                 }else{
                    progressBar.setVisibility(View.GONE);
@@ -152,6 +153,10 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Vanshawal>> call, Throwable t) {
+                if(t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });

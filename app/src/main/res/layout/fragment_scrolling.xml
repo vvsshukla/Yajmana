@@ -1,597 +1,709 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
     tools:context=".ScrollingFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/scrollingProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginBottom="40dp">
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
 
-        <TextView
-            android:id="@+id/swa_vyaktichi_mahiti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/swa_vyaktichi_mahiti"
-            android:textStyle="bold" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="90dp"
-            android:layout_height="60dp"
-            android:layout_below="@+id/swa_vyaktichi_mahiti"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/person_s_photo"
-            android:padding="4dp"
-            android:src="@drawable/client" />
-
-        <EditText
-            android:id="@+id/full_name"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/full_name_label"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:layout_below="@+id/imageView"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:background="@drawable/oval"
-            />
+            android:padding="8dp"
+            android:layout_marginBottom="40dp">
 
-        <LinearLayout
-            android:id="@+id/LayoutTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/full_name"
-            android:layout_marginTop="10dp"
-            android:weightSum="1">
-            <!-- gaon -->
+            <TextView
+                android:id="@+id/swa_vyaktichi_mahiti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/swa_vyaktichi_mahiti"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/swa_vyaktichi_mahiti"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/person_s_photo"
+                android:padding="4dp"
+                android:src="@drawable/client" />
+
             <EditText
-                android:id="@+id/city"
+                android:id="@+id/full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/city_label"
+                android:hint="@string/full_name_label"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="textPersonName"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:background="@drawable/oval"/>
-            <!-- taluka -->
-            <EditText
-                android:id="@+id/taluka"
+                android:background="@drawable/oval"
+                />
+
+            <LinearLayout
+                android:id="@+id/LayoutTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/taluka_lable"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:padding="10dp"
-                android:background="@drawable/oval"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LayoutThree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LayoutTwo"
-            android:layout_marginTop="10dp"
-            android:weightSum="1">
-            <!-- jilha -->
-            <EditText
-                android:id="@+id/district"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/district"
-                android:importantForAutofill="no"
-                android:inputType="text" android:padding="10dp"
-                android:background="@drawable/oval" />
-            <!-- Samaj -->
-            <EditText
-                android:id="@+id/caste"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/caste"
-                android:importantForAutofill="no"
-                android:inputType="text" android:padding="10dp"
-                android:background="@drawable/oval"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LayoutFour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LayoutThree"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="1">
-            <!-- tithi  -->
-            <EditText
-                android:id="@+id/death_anniversary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/date_of_death"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:digits="0123456789-"
-                android:padding="10dp"
-                android:background="@drawable/oval" />
-            <!-- relation  -->
-            <EditText
-                android:id="@+id/relation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="@string/relation_label"
-                android:importantForAutofill="no"
-                android:inputType="text" android:padding="10dp"
-                android:background="@drawable/oval"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:layout_marginTop="10dp"
-            android:id="@+id/genderLayout"
-            android:layout_below="@+id/LayoutFour"
-            android:orientation="horizontal">
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:id="@+id/genderGroup">
-
-                <RadioButton
+                android:layout_below="@+id/full_name"
+                android:layout_marginTop="10dp"
+                android:weightSum="1">
+                <!-- gaon -->
+                <EditText
+                    android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gender_female"
-                    android:text="@string/female" />
-
-                <RadioButton
+                    android:layout_weight="0.5"
+                    android:hint="@string/city_label"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:background="@drawable/oval"/>
+                <!-- taluka -->
+                <EditText
+                    android:id="@+id/taluka"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gender_male"
-                    android:text="@string/male" />
+                    android:layout_weight="0.5"
+                    android:hint="@string/taluka_lable"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/oval"/>
+            </LinearLayout>
 
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LayoutFive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/genderLayout"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/pooja_person_names"
+            <LinearLayout
+                android:id="@+id/LayoutThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pooja_person_names_label" />
-
-            <TextView
-                android:id="@+id/pooja_person_vanshawal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_below="@+id/LayoutTwo"
                 android:layout_marginTop="10dp"
-                android:text="@string/add_button_tip" />
+                android:weightSum="1">
+                <!-- jilha -->
+                <EditText
+                    android:id="@+id/district"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/district"
+                    android:importantForAutofill="no"
+                    android:inputType="text" android:padding="10dp"
+                    android:background="@drawable/oval" />
+                <!-- Samaj -->
+                <EditText
+                    android:id="@+id/caste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/caste"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/oval"/>
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/LayoutSix"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LayoutFive"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <!-- tumche purna nav -->
-            <EditText
-                android:id="@+id/your_full_name"
+            <LinearLayout
+                android:id="@+id/LayoutFour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/your_full_name_label"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp"
-                android:background="@drawable/oval"/>
-
-            <EditText
-                android:id="@+id/fathers_full_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/fathers_full_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <!-- vadilanche purna nav -->
-
-            <EditText
-                android:id="@+id/mothers_full_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/mothers_full_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <EditText
-                android:id="@+id/grandpa_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/grandpa_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <EditText
-                android:id="@+id/panjoba_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/panjoba_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <EditText
-                android:id="@+id/ni_panjoba_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/ni_panjoba_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <!-- Real Uncle NAme -->
-
-            <EditText
-                android:id="@+id/real_uncle_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/real_uncle_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:padding="10dp"
+                android:layout_below="@+id/LayoutThree"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/oval" />
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <!-- tithi  -->
+                <EditText
+                    android:id="@+id/death_anniversary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/date_of_death"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:digits="0123456789-"
+                    android:padding="10dp"
+                    android:background="@drawable/oval" />
+                <!-- relation  -->
+                <EditText
+                    android:id="@+id/relation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/relation_label"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:background="@drawable/oval"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dynamicL1"
-                android:orientation="vertical">
+                android:weightSum="1"
+                android:layout_marginTop="10dp"
+                android:id="@+id/genderLayout"
+                android:layout_below="@+id/LayoutFour"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/genderGroup">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/gender_female"
+                        android:text="@string/female" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/gender_male"
+                        android:text="@string/male" />
+
+                </RadioGroup>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/add_more_real_uncle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="#FFFFFF"
-                android:text="@string/add_more"
-                android:textColor="@color/red"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/cousin_uncle_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/cousin_uncle_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
-
             <LinearLayout
+                android:id="@+id/LayoutFive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dynamicL2"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_cousin_uncle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:layout_margin="20dp"
-                android:textSize="24sp"
-                />
-
-            <EditText
-                android:id="@+id/real_uncle_son_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/real_uncle_son_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:layout_below="@+id/genderLayout"
                 android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dynamicL3"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_real_uncle_son"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:layout_margin="20dp"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/cousin_uncle_son_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/cousin_uncle_son_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dynamicL4"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_cousin_uncle_son"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:layout_margin="20dp"
-                android:textSize="24sp" />
-
-            <!-- Real Brother Name -->
-
-            <EditText
-                android:id="@+id/real_brother_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/real_brother_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dynamicL5"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_real_brother"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:layout_margin="20dp"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/real_brother_son_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/real_brother_son_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dynamicL6"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_real_brother_son"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:layout_margin="20dp"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/son_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/son_name"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dynamicL7"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_more_son"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:textColor="@color/red"
-                android:text="@string/add_more"
-                android:textSize="24sp"
-                android:layout_margin="20dp"
-                />
-
-            <EditText
-                android:id="@+id/mobile_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/mobile_no"
-                android:importantForAutofill="no"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:padding="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/oval"/>
-
-            <EditText
-                android:id="@+id/tip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/tip"
-                android:importantForAutofill="no" android:padding="10dp" android:layout_marginTop="10dp"
-                android:background="@drawable/oval"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signLayout"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/signature"
+                    android:id="@+id/pooja_person_names"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pooja_person_names_label" />
+
+                <TextView
+                    android:id="@+id/pooja_person_vanshawal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="@string/signature"
-                    android:padding="10dp"/>
+                    android:text="@string/add_button_tip" />
 
-                <com.github.gcacace.signaturepad.views.SignaturePad
-                    android:id="@+id/signature_pad"
-                    android:layout_marginTop="30dp"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LayoutSix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/LayoutFive"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <!-- tumche purna nav -->
+                <EditText
+                    android:id="@+id/your_full_name"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:hint="@string/signature"
-                    android:background="@drawable/border_signature"
-                    android:importantForAutofill="no" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/your_full_name_label"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" android:padding="10dp"
+                    android:background="@drawable/oval"/>
+
+                <EditText
+                    android:id="@+id/fathers_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fathers_full_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <!-- vadilanche purna nav -->
+
+                <EditText
+                    android:id="@+id/mothers_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/mothers_full_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <EditText
+                    android:id="@+id/grandpa_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/grandpa_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" android:padding="10dp" android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <EditText
+                    android:id="@+id/panjoba_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/panjoba_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <EditText
+                    android:id="@+id/ni_panjoba_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/ni_panjoba_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <!-- Real Uncle NAme -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/real_uncle_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/real_uncle_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/oval"
+                        android:layout_weight="0.95"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_more_real_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:text="@string/add_more"
+                        android:textColor="@color/red"
+                        android:textSize="24sp"
+                        android:layout_weight="0.05"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL1"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/cousin_uncle_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:ems="10"
+                        android:hint="@string/cousin_uncle_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_more_cousin_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:text="@string/add_more"
+                        android:textColor="@color/red"
+                        android:textSize="24sp"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL2"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/real_uncle_son_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:hint="@string/real_uncle_son_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval" />
+
+                    <TextView
+                        android:id="@+id/add_more_real_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:text="@string/add_more"
+                        android:textColor="@color/red"
+                        android:textSize="24sp"
+                        android:layout_weight="0.05"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL3"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/cousin_uncle_son_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:ems="10"
+                        android:hint="@string/cousin_uncle_son_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_more_cousin_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:textColor="@color/red"
+                        android:text="@string/add_more"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL4"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+
+
+                <!-- Real Brother Name -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/real_brother_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:hint="@string/real_brother_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_more_real_brother"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:textColor="@color/red"
+                        android:text="@string/add_more"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL5"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/real_brother_son_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:hint="@string/real_brother_son_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval" />
+
+                    <TextView
+                        android:id="@+id/add_more_real_brother_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:textColor="@color/red"
+                        android:text="@string/add_more"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL6"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/son_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:hint="@string/son_name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"/>
+
+                    <TextView
+                        android:id="@+id/add_more_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:gravity="center"
+                        android:background="#FFFFFF"
+                        android:textColor="@color/red"
+                        android:text="@string/add_more"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dynamicL7"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/mobile_no"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/oval"/>
+
+                <EditText
+                    android:id="@+id/tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="@string/tip"
+                    android:importantForAutofill="no" android:padding="10dp" android:layout_marginTop="10dp"
+                    android:background="@drawable/oval"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signLayout"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/signature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:hint="@string/signature"
+                        android:padding="10dp"/>
+
+                    <com.github.gcacace.signaturepad.views.SignaturePad
+                        android:id="@+id/signature_pad"
+                        android:layout_marginTop="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:hint="@string/signature"
+                        android:background="@drawable/border_signature"
+                        android:importantForAutofill="no" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/oval"
+                        android:layout_marginTop="30dp"
+                        android:id="@+id/signatureButtonLayout">
+
+    <!--                    <Button-->
+    <!--                        android:id="@+id/saveSignature"-->
+    <!--                        style="?android:attr/buttonBarButtonStyle"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:backgroundTint="@color/red"-->
+    <!--                        android:text="@string/saveSignature"-->
+    <!--                        tools:targetApi="lollipop"/>-->
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/signatureButtonLayout">
+                    android:layout_marginBottom="20dp">
 
-<!--                    <Button-->
-<!--                        android:id="@+id/saveSignature"-->
-<!--                        style="?android:attr/buttonBarButtonStyle"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:backgroundTint="@color/red"-->
-<!--                        android:text="@string/saveSignature"-->
-<!--                        tools:targetApi="lollipop"/>-->
+                    <Button
+                        android:id="@+id/btnAdd"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:text="@string/save"
+                        tools:targetApi="lollipop"/>
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:backgroundTint="@color/primary"
+                        android:text="@string/cancel"
+                        tools:targetApi="lollipop"
+                        android:layout_marginStart="30dp" />
+
+                    <Button
+                        android:id="@+id/clearSignature"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/grey"
+                        android:text="@string/clearSignature"
+                        android:layout_marginLeft="30dp"
+                        tools:targetApi="lollipop"
+                        android:layout_marginStart="30dp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp">
+        </RelativeLayout>
 
-                <Button
-                    android:id="@+id/btnAdd"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/red"
-                    android:text="@string/save"
-                    tools:targetApi="lollipop"/>
+    </androidx.core.widget.NestedScrollView>
 
-                <Button
-                    android:id="@+id/btnCancel"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:backgroundTint="@color/primary"
-                    android:text="@string/cancel"
-                    tools:targetApi="lollipop"
-                    android:layout_marginStart="30dp" />
-
-                <Button
-                    android:id="@+id/clearSignature"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/grey"
-                    android:text="@string/clearSignature"
-                    android:layout_marginLeft="30dp"
-                    tools:targetApi="lollipop"
-                    android:layout_marginStart="30dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

@@ -45,48 +45,107 @@
                 android:padding="4dp"
                 android:src="@drawable/client" />
 
-            <EditText
-                android:id="@+id/full_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/full_name_label"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:orientation="vertical"
+                android:id="@+id/LayoutFullName"
                 android:layout_below="@+id/imageView"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:background="@drawable/oval"
-                />
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/full_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_name_label"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginStart="20dp"-->
+                <EditText
+                    android:id="@+id/full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/full_name_label"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/oval"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/LayoutTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/full_name"
+                android:layout_below="@+id/LayoutFullName"
                 android:layout_marginTop="10dp"
                 android:weightSum="1">
                 <!-- gaon -->
-                <EditText
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="@string/city_label"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:background="@drawable/oval"/>
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:id="@+id/city_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/city_label"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/city_lable"
+                        android:hint="@string/city_label"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"/>
+
+                </RelativeLayout>
+
                 <!-- taluka -->
-                <EditText
-                    android:id="@+id/taluka"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="@string/taluka_lable"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:background="@drawable/oval"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/taluka_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/taluka_label"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/taluka"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/taluka_lable"
+                        android:hint="@string/taluka_lable"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -97,26 +156,66 @@
                 android:layout_below="@+id/LayoutTwo"
                 android:layout_marginTop="10dp"
                 android:weightSum="1">
+
                 <!-- jilha -->
-                <EditText
-                    android:id="@+id/district"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="@string/district"
-                    android:importantForAutofill="no"
-                    android:inputType="text" android:padding="10dp"
-                    android:background="@drawable/oval" />
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:id="@+id/district_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/district_label"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/district"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/district_lable"
+                        android:hint="@string/district"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:background="@drawable/oval" />
+
+                </RelativeLayout>
+
                 <!-- Samaj -->
-                <EditText
-                    android:id="@+id/caste"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="@string/caste"
-                    android:importantForAutofill="no"
-                    android:inputType="text" android:padding="10dp"
-                    android:background="@drawable/oval"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/caste_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/caste_label"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/caste"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/caste_label"
+                        android:hint="@string/caste"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -129,27 +228,64 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
                 <!-- tithi  -->
-                <EditText
-                    android:id="@+id/death_anniversary"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="@string/date_of_death"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:digits="0123456789-"
-                    android:padding="10dp"
-                    android:background="@drawable/oval" />
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:id="@+id/death_anniversary_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/death_anniverary_msg"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/death_anniversary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/death_anniversary_label"
+                        android:hint="@string/date_of_death_label"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:digits="0123456789-"
+                        android:padding="10dp"
+                        android:background="@drawable/oval" />
+
+                </RelativeLayout>
                 <!-- relation  -->
-                <EditText
-                    android:id="@+id/relation"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="@string/relation_label"
-                    android:importantForAutofill="no"
-                    android:inputType="text" android:padding="10dp"
-                    android:background="@drawable/oval"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/relation_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/relation_label"
+                        android:importantForAutofill="no"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relation_label"
+                        android:hint="@string/relation_label"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:background="@drawable/oval"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -185,214 +321,174 @@
                 android:orientation="vertical">
 
                 <!-- tumche purna nav -->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/full_name_label"
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp" />
-
-                <EditText
-                    android:id="@+id/your_full_name"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.7"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/your_full_name_label"
-                    android:background="@drawable/oval"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    />
-
-                </LinearLayout>
-
-                <!-- vadilanche purna nav -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/your_full_name_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="@string/fathers_name"
-                        android:textSize="18sp"
+                        android:text="@string/your_full_name_label"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
                         android:padding="10dp"
                         android:layout_marginTop="10dp" />
 
                     <EditText
-                        android:id="@+id/fathers_full_name"
-                        android:layout_width="0dp"
+                        android:id="@+id/your_full_name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.7"
+                        android:layout_below="@+id/your_full_name_label"
+                        android:hint="@string/your_full_name_label"
+                        android:background="@drawable/oval"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"/>
+                    <!-- vadilanche purna nav -->
+                    <TextView
+                        android:id="@+id/your_father_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/your_full_name"
+                        android:text="@string/fathers_name"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        android:padding="10dp" />
+
+                    <EditText
+                        android:id="@+id/fathers_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/your_father_name"
                         android:hint="@string/fathers_full_name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/oval"
-                        android:gravity="center_horizontal"
-                         />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                        android:background="@drawable/oval" />
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/mothers_full_name_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/fathers_full_name"
                         android:text="@string/mothers_full_name"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:padding="10dp" />
 
                     <EditText
                         android:id="@+id/mothers_full_name"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/mothers_full_name_label"
                         android:hint="@string/mothers_full_name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
                         android:background="@drawable/oval"/>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/grandpa_name_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/mothers_full_name"
                         android:text="@string/grandpa_name"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:padding="10dp"/>
 
                     <EditText
                         android:id="@+id/grandpa_name"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
-                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/grandpa_name_label"
                         android:hint="@string/grandpa_name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/oval" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/panjoba_name_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/grandpa_name"
                         android:text="@string/panjoba_name"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:padding="10dp"/>
 
                     <EditText
                         android:id="@+id/panjoba_name"
-                        android:gravity="center_horizontal"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/panjoba_name_label"
                         android:hint="@string/panjoba_name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/oval" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/ni_panjoba_name_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/panjoba_name"
                         android:text="@string/ni_panjoba_name"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:padding="10dp" />
 
                     <EditText
                         android:id="@+id/ni_panjoba_name"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
-                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/ni_panjoba_name_label"
                         android:hint="@string/ni_panjoba_name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/oval"/>
 
-                </LinearLayout>
+                </RelativeLayout>
 
                 <!-- Real Uncle Name -->
-
-                <TextView
-                    android:id="@+id/add_more_real_uncle"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:text="@string/real_uncle_name_plus"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:gravity="center_horizontal" />
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/real_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:text="@string/real_uncle_name"
+                        android:layout_marginTop="20dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/add_more_real_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -403,17 +499,32 @@
                 </LinearLayout>
 
                 <!-- Cousin Uncle Name -->
-
-                <TextView
-                    android:id="@+id/add_more_cousin_uncle"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/cousin_uncle_name_plus"
-                    android:layout_marginTop="20dp" />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/cousin_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/cousin_uncle_name"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_cousin_uncle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -425,16 +536,32 @@
 
                 <!-- Real Uncle Son Name -->
 
-                <TextView
-                    android:id="@+id/add_more_real_uncle_son"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/real_uncle_son_name_plus"
-                    android:layout_marginTop="20dp" />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/real_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/real_uncle_son_name"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_real_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -445,17 +572,32 @@
                 </LinearLayout>
 
                 <!-- Cousin Uncle Son Name -->
-
-                <TextView
-                    android:id="@+id/add_more_cousin_uncle_son"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/cousin_uncle_son_name_plus"
-                    android:layout_marginTop="20dp" />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/cousin_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/cousin_uncle_son_name"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_cousin_uncle_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -466,17 +608,32 @@
                 </LinearLayout>
 
                 <!-- Real Brother Name -->
-
-                <TextView
-                    android:id="@+id/add_more_real_brother"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/real_brother_name_plus"
-                    android:layout_marginTop="20dp" />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/real_brother"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="@string/real_brother_name"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_real_brother"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -487,18 +644,32 @@
                 </LinearLayout>
 
                 <!-- Real Brother Son Name -->
-
-                <TextView
-                    android:id="@+id/add_more_real_brother_son"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/real_brother_son_name_plus"
-                    android:layout_marginTop="20dp"
-                    />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/real_brother_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/real_brother_son_name"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_real_brother_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -509,18 +680,32 @@
                 </LinearLayout>
 
                 <!-- Real Son Name -->
-
-                <TextView
-                    android:id="@+id/add_more_son"
-                    android:layout_width="240dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/oval"
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:text="@string/son_name_plus"
-                    android:layout_marginTop="20dp"
-                    />
+                    android:weightSum="1">
+                    <TextView
+                        android:id="@+id/son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.95"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@string/son_name"
+                        android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_more_son"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:text="@string/add_more"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -530,66 +715,62 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/mobile_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/mobile_no_label"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="20dp" />
+                        android:layout_marginTop="20dp"
+                        android:padding="10dp" />
 
                     <EditText
                         android:id="@+id/mobile_no"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/mobile_label"
                         android:hint="@string/mobile_no"
                         android:importantForAutofill="no"
                         android:inputType="phone"
                         android:padding="10dp"
-                        android:layout_marginTop="20dp"
                         android:background="@drawable/oval"/>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:id="@+id/tip_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/mobile_no"
                         android:text="@string/tip"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
                         android:gravity="center_horizontal"
-                        android:background="@drawable/oval"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:padding="10dp" />
 
                     <EditText
                         android:id="@+id/tip"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tip_label"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:hint="@string/tip"
                         android:importantForAutofill="no"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/oval"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                 </LinearLayout>
 

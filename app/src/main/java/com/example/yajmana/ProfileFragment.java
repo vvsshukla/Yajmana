@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment {
 
     public void loadProfile(View view){
         Log.d("loadProfile:", "Inside loadProfile");
-        Call<List<Profile>> call = Api.getClient().getProfile();
+        Call<List<Profile>> call = Api.getClient(this.getActivity()).getProfile();
         call.enqueue(new Callback<List<Profile>>() {
             @Override
             public void onResponse(Call<List<Profile>> call, Response<List<Profile>> response) {
@@ -95,7 +95,8 @@ public class ProfileFragment extends Fragment {
                 if(profile.get(0).getMobileNo().equals("")){
                    Toast.makeText(getContext(),"Profile does not exist.",Toast.LENGTH_SHORT).show();
                 }else{
-                   fullName.setText(profile.get(0).getFirstName() + " " + profile.get(0).getMiddleName() + " " + profile.get(0).getLastName());
+                   String fullname = profile.get(0).getFirstName() + " " + profile.get(0).getMiddleName() + " " + profile.get(0).getLastName();
+                   fullName.setText(fullname);
                    mobileNo.setText(profile.get(0).getMobileNo());
                    email.setText(profile.get(0).getEmail());
                 }
@@ -103,6 +104,10 @@ public class ProfileFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<Profile>> call, Throwable t) {
+                if(t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });

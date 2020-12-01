@@ -26,6 +26,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yajmana.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
@@ -41,6 +42,8 @@ public class HomeFragment extends Fragment {
     SearchView searchView;
     RecyclerView recyclerView;
     TextView emptyText;
+    View rootView;
+    MenuItem item;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,6 +60,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d("onCreateView", "Inside onCreateView()");
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = view.findViewById(R.id.rootLayout);
         ((NavigateActivity)getContext()).setActionBarTitle(getString(R.string.vanshawal_list));
         progressBar = view.findViewById(R.id.loading);
         progressBar.setVisibility(View.VISIBLE);
@@ -66,7 +70,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         Log.d("FetchData", "Fetching Vanshawal");
-        Call<List<Vanshawal>> call = Api.getClient().getVanshawal();// Get vanshawal data
+        Call<List<Vanshawal>> call = Api.getClient(this.getActivity()).getVanshawal();// Get vanshawal data
         call.enqueue(new Callback<List<Vanshawal>>() {
             @Override
             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
@@ -80,6 +84,10 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Vanshawal>> call, Throwable t) {
+                if(t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });
@@ -92,14 +100,14 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.list_menu,menu);
-        MenuItem item = menu.findItem(R.id.app_bar_search);
+        item = menu.findItem(R.id.app_bar_search);
         if(item!=null){
-//          Log.d("app_bar_search", "Inside app_bar_search");
-            searchView = new SearchView(((NavigateActivity)getContext()).getSupportActionBar().getThemedContext());
-            searchView.setSubmitButtonEnabled(true);
+//            searchView = new SearchView(((NavigateActivity)getContext()).getSupportActionBar().getThemedContext());
+            searchView = (SearchView) item.getActionView();
+            searchView.setIconifiedByDefault(true);
+//            searchView.setSubmitButtonEnabled(true);
             searchView.setQueryHint(getString(R.string.vanshawal_no_hint));
             searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
             item.setActionView(searchView);
@@ -154,7 +162,8 @@ public class HomeFragment extends Fragment {
                 return true;
             }
         });
-        return;
+        super.onCreateOptionsMenu(menu, inflater);
+//        return;
     }
 
     @Override
@@ -174,7 +183,7 @@ public class HomeFragment extends Fragment {
 
     private void searchByVanshawalCode(String s) {
         Log.d("search_key",s);
-        Call<List<Vanshawal>> call = Api.getClient().searchByVanshawalCode(s);// Get searched data
+        Call<List<Vanshawal>> call = Api.getClient(this.getActivity()).searchByVanshawalCode(s);// Get searched data
         call.enqueue(new Callback<List<Vanshawal>>() {
             @Override
             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
@@ -199,6 +208,9 @@ public class HomeFragment extends Fragment {
                 Log.d("onFailure:", "Error:"+ t.toString());
             }
         });
+
+        searchView.setIconified(true);
+        searchView.onActionViewCollapsed();
         getBack();
     }
 
@@ -208,13 +220,18 @@ public class HomeFragment extends Fragment {
     }
 
     public void getBack(){
+        Context context = this.getActivity();
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(event.getAction()==KeyEvent.ACTION_DOWN){
+                    Log.d("action_down", "onKey: Hi");
+                    searchView.clearFocus();
                     if(keyCode == KeyEvent.KEYCODE_BACK){
+                        searchView.setIconified(true);
+                        searchView.onActionViewCollapsed();
                         progressBar.setVisibility(View.VISIBLE);
                         if(recyclerView.getVisibility() != View.VISIBLE){
                            recyclerView.setVisibility(View.VISIBLE);
@@ -222,7 +239,7 @@ public class HomeFragment extends Fragment {
                         if(emptyText.getVisibility() == View.VISIBLE){
                             emptyText.setVisibility(View.GONE);
                         }
-                        Call<List<Vanshawal>> call = Api.getClient().getVanshawal();// Get vanshawal data
+                        Call<List<Vanshawal>> call = Api.getClient(context).getVanshawal();// Get vanshawal data
                         call.enqueue(new Callback<List<Vanshawal>>() {
                             @Override
                             public void onResponse(Call<List<Vanshawal>> call, Response<List<Vanshawal>> response) {
