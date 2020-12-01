@@ -38,8 +38,6 @@ import androidx.annotation.Nullable;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -258,6 +256,9 @@ public class ScrollingFragment extends Fragment {
                     delete_dynamic_layout(p,"real_uncle");
                 }
             });
+            e1.requestFocus();
+            e1.setFocusable(true);
+            e1.setFocusableInTouchMode(true);
             if(this.real_uncle_count > 0){
                 View btnView = parentL1[this.real_uncle_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -311,6 +312,9 @@ public class ScrollingFragment extends Fragment {
                     delete_dynamic_layout(p, "cousin_uncle");
                 }
             });
+            e2.requestFocus();
+            e2.setFocusable(true);
+            e2.setFocusableInTouchMode(true);
             p.addView(t2);
 
             if(this.cousin_uncle_count > 0){
@@ -364,6 +368,9 @@ public class ScrollingFragment extends Fragment {
                     delete_dynamic_layout(p, "real_uncle_son");
                 }
             });
+            e3.requestFocus();
+            e3.setFocusable(true);
+            e3.setFocusableInTouchMode(true);
             p.addView(t3);
             if(this.real_uncle_son_count > 0){
                 View btnView = parentL3[this.real_uncle_son_count-1].getChildAt(1);
@@ -413,6 +420,9 @@ public class ScrollingFragment extends Fragment {
             t4.setGravity(Gravity.CENTER);
             t4.setTextColor(Color.RED);
             p.addView(t4);
+            e4.requestFocus();
+            e4.setFocusable(true);
+            e4.setFocusableInTouchMode(true);
             if(this.cousin_uncle_son_count > 0){
                 View btnView = parentL4[this.cousin_uncle_son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -472,6 +482,9 @@ public class ScrollingFragment extends Fragment {
                     delete_dynamic_layout(p, "real_brother");
                 }
             });
+            e5.requestFocus();
+            e5.setFocusable(true);
+            e5.setFocusableInTouchMode(true);
             p.addView(t5);
             if(this.real_brother_count > 0){
                 Log.d("real_brother_count", String.valueOf(real_brother_count));
@@ -528,6 +541,9 @@ public class ScrollingFragment extends Fragment {
                 }
             });
             p.addView(t6);
+            e6.requestFocus();
+            e6.setFocusable(true);
+            e6.setFocusableInTouchMode(true);
             if(this.real_brother_son_count > 0){
                 View btnView = parentL6[this.real_brother_son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
@@ -582,6 +598,9 @@ public class ScrollingFragment extends Fragment {
                 }
             });
             p.addView(t7);
+            e7.requestFocus();
+            e7.setFocusable(true);
+            e7.setFocusableInTouchMode(true);
             if(this.son_count > 0){
                 View btnView = parentL7[this.son_count-1].getChildAt(1);
                 btnView.setEnabled(false);
